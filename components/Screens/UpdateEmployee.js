@@ -54,7 +54,6 @@ const updateEmployeeInputs = [
 
 const AddEmployee = () => (
   <TopContainer>
-    <StyledHeader>Updating Employee</StyledHeader>
     <Form action="Update Employee" inputs={updateEmployeeInputs} />
   </TopContainer>
 )

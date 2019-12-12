@@ -4,7 +4,7 @@ import ImagePicker from 'react-native-image-picker'
 import { StyledForm, StyledInput } from '../Styled'
 import ActionButton from './ActionButton'
 
-const Form = ({ inputs, action }) => {
+const Form = ({ inputs, action, onSubmit }) => {
   const [controls, setControls] = useState(inputs)
 
   const inputRefs = {}
@@ -22,9 +22,8 @@ const Form = ({ inputs, action }) => {
     })
   }
 
-  const print = () => controls.map(({ value }) => console.log(value))
-
   const formInputs = controls.map(({ id, ...config }, i) => {
+    config['placeholderTextColor'] = '#777'
     if (config.isMediaInput)
       config['onTouchStart'] = () => uploadImage(id)
     if (i === 0)
@@ -49,7 +48,7 @@ const Form = ({ inputs, action }) => {
   return (
     <StyledForm>
       {formInputs}
-      <ActionButton title={action} onPress={print} />
+      <ActionButton title={action} onPress={onSubmit} />
     </StyledForm>
   )
 }

@@ -12,7 +12,7 @@ export const TopContainer = styled.View`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 100px;
+  padding-top: 10px;
 `
 
 export const StyledForm = styled.View`
@@ -24,6 +24,7 @@ export const StyledForm = styled.View`
 `
 
 export const StyledInput = styled.TextInput`
+  color: #000;
   border: 1px solid #ababab;
   border-top-left-radius: ${({ first }) => first ? '3px' : '0'};
   border-top-right-radius: ${({ first }) => first ? '3px' : '0'};
