@@ -37,7 +37,8 @@ export const StyledInput = styled.TextInput`
 
 export const StyledHeader = styled.Text`
   width: 100%;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
   text-align: center;
 `
 

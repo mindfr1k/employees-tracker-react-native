@@ -2,7 +2,7 @@ import React from 'react'
 
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
-import { TopContainer, StyledHeader } from '../Styled'
+import { TopContainer } from '../Styled'
 
 const addEmployeeInputs = [
   {
@@ -52,7 +52,7 @@ const addEmployeeInputs = [
   }
 ]
 
-const AddEmployee = () => (
+const AddEmployee = ({ navigation }) => (
   <TopContainer>
     <Form action="Add Employee" inputs={addEmployeeInputs} />
   </TopContainer>

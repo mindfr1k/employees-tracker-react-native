@@ -1,11 +1,13 @@
 import React from 'react'
-import { TouchableWithoutFeedback, Keyboard, View } from 'react-native'
+import { TouchableWithoutFeedback, Keyboard, View, KeyboardAvoidingView } from 'react-native'
 
 const withKeyboardDismiss = WrappedComponent => props => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
-        <WrappedComponent {...props} />
+        <KeyboardAvoidingView behavior="padding">
+          <WrappedComponent {...props} />
+        </KeyboardAvoidingView>
       </View>
     </TouchableWithoutFeedback>
   )

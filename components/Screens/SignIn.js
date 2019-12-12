@@ -2,7 +2,7 @@ import React from 'react'
 
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
-import { CenteredContainer, StyledHeader } from '../Styled'
+import { CenteredContainer } from '../Styled'
 
 const signInInputs = [
   {
