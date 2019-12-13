@@ -3,7 +3,7 @@ import React from 'react'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 
 const EmployeeInfo = () => {
-  return
+  return <></>
 }
 
 export default withKeyboardDismiss(EmployeeInfo)

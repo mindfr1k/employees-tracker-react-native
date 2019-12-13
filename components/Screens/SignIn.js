@@ -25,7 +25,7 @@ const signInInputs = [
 
 const SignIn = ({ navigation }) => (
   <CenteredContainer>
-    <Form action="Log In" inputs={signInInputs} onSubmit={() => navigation.replace('AddEmployee')} />
+    <Form action="Log In" inputs={signInInputs} onSubmit={() => navigation.replace('EmployeeInfo')} />
   </CenteredContainer>
 )
 
