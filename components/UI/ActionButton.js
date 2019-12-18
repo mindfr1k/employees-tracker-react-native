@@ -1,27 +1,32 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { Animated } from 'react-native'
+import { Transitioning, Transition } from 'react-native-reanimated'
 
 import { StyledOpacity, StyledButton } from '../Styled'
 
 const ActionButton = ({ title, onPress }) => {
-  const AnimatedOpacity = Animated.createAnimatedComponent(StyledOpacity)
-  const scale = new Animated.Value(1)
-  const pressInHandler = () => Animated.timing(scale, {
-    duration: 100,
-    toValue: 0.9
-  }).start()
-  const pressOutHandler = () => Animated.timing(scale, {
-    duration: 100,
-    toValue: 1
-  }).start()
+  const [scale, setScale] = useState(1)
+  const ref = useRef()
+
+  const transition = <Transition.Change durationMs={100} interpolation="easeIn" />
   return (
-    <AnimatedOpacity
-    style={{ transform: [{ scale }] }}
-    onPressIn={pressInHandler}
-    onPressOut={pressOutHandler}
-    onPress={onPress}>
-    <StyledButton>{title}</StyledButton>
-  </AnimatedOpacity>
+    <Transitioning.View style={{ width: '100%' }}
+      ref={ref}
+      transition={transition}>
+      <StyledOpacity
+        style={{ transform: [{ scaleX: scale }] }}
+        onPressIn={() => {
+          ref.current.animateNextTransition()
+          setScale(0.9)
+        }}
+        onPressOut={() => {
+          ref.current.animateNextTransition()
+          setScale(1)
+        }}
+        onPress={onPress}>
+        <StyledButton>{title}</StyledButton>
+      </StyledOpacity>
+    </Transitioning.View>
   )
 }
 

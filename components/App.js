@@ -8,7 +8,7 @@ import AddEmployee from './Screens/AddEmployee'
 import UpdateEmployee from './Screens/UpdateEmployee'
 import EmployeeInfo from './Screens/EmployeeInfo'
 import createNavStack from './shared/createNavStack'
-import { CenteredContainer, StyledHeader } from './Styled'
+import { StyledHeader } from './Styled'
 
 const routes = [
   { name: 'Sign In', component: SignIn, init: true },
