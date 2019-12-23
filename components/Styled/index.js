@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 
 export const CenteredContainer = styled.View`
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,4 +58,23 @@ export const StyledButton = styled.Text`
   color: white;
   font-size: 18px;
   padding: 10px;
+`
+
+export const StyledSearch = styled.View`
+  width: 95%;
+  position: relative;
+  margin: 8px auto;
+  padding: 5px;
+  background-color: #ededed;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+`
+
+export const SearchInput = styled.TextInput`
+  position: absolute;
+  width: 100%;
+  left: 16px;
+  padding: 5px;
 `

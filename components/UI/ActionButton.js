@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { Animated } from 'react-native'
 import { Transitioning, Transition } from 'react-native-reanimated'
 
 import { StyledOpacity, StyledButton } from '../Styled'
