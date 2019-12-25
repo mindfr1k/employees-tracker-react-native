@@ -7,14 +7,14 @@ import SignIn from './Screens/SignIn'
 import AddEmployee from './Screens/AddEmployee'
 import UpdateEmployee from './Screens/UpdateEmployee'
 import EmployeeInfo from './Screens/EmployeeInfo'
-import SearchControl from './UI/SearchControl'
+import SearchHeader from './UI/SearchHeader'
 import createNavStack from './shared/createNavStack'
 
 const routes = [
   {
     name: 'Sign In', component: SignIn, init: true, header: {
       style: { height: 70 },
-      title: <SearchControl placeholderColor="#888" />
+      component: <SearchHeader title="Sign In" placeholderColor="#888" />
     }
   },
   { name: 'Add Employee', component: AddEmployee },

@@ -7,17 +7,16 @@ export default createNavStack = routes => {
   const config = routes.reduce((acc, { name, component, header, init }) => ({
     ...acc, [name.replace(/ /g, '')]: {
       screen: component,
-      navigationOptions: {
-        headerTitle: () => (
-          <CenteredContainer>
+      navigationOptions: ({ navigation: { state } }) => ({
+        headerTitle: () => header && header.component
+        ? header.component
+        : <CenteredContainer>
             <StyledHeader>{name}</StyledHeader>
-            {header && header.title}
-          </CenteredContainer>
-        ),
+          </CenteredContainer>,
         headerLeft: null,
         gesturesEnabled: false,
         headerStyle: header && header.style
-      },
+      }),
       initialRouteName: init ? name.replace(/ /g, '') : null
     }
   }), {})
