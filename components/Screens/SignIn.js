@@ -24,13 +24,12 @@ const signInInputs = [
   }
 ]
 
-const SignIn = ({ navigation }) => (
+const SignIn = () => (
   <CenteredContainer>
     <InfoHeader text="Please, log in." />
     <Form
       action="Log In"
-      inputs={signInInputs}
-      onSubmit={() => navigation.navigate('EmployeeInfo')} />
+      inputs={signInInputs} />
   </CenteredContainer>
 )
 

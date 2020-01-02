@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import ImagePicker from 'react-native-image-picker'
+import { withNavigation } from 'react-navigation'
 
 import { StyledForm, StyledInput } from '../Styled'
 import ActionButton from './ActionButton'
 
-const Form = ({ inputs, action, onSubmit }) => {
+const Form = ({ inputs, action, navigation }) => {
   const [controls, setControls] = useState(inputs)
   const inputRefs = {}
   const placeholderColor = '#777'
@@ -21,6 +22,11 @@ const Form = ({ inputs, action, onSubmit }) => {
         console.log(error)
       setControls(controls.map(control => control.id === id ? { ...control, value: fileName } : control))
     })
+  }
+
+  const submitHandler = () => {
+    navigation.navigate('EmployeeInfo',
+      controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {
@@ -49,9 +55,9 @@ const Form = ({ inputs, action, onSubmit }) => {
   return (
     <StyledForm>
       {formInputs}
-      <ActionButton title={action} onPress={onSubmit} />
+      <ActionButton title={action} onPress={submitHandler} />
     </StyledForm>
   )
 }
 
-export default Form
+export default withNavigation(Form)
