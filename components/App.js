@@ -18,8 +18,8 @@ const routes = {
 const routesAnimation = {
   transition: (
     <Transition.Together>
-      <Transition.Out type="slide-bottom" durationMs={400} interpolation="easeOut" />
-      <Transition.In type="slide-top" durationMs={400} interpolation="easeIn" />
+      <Transition.Out type="slide-bottom" durationMs={600} interpolation="easeIn" />
+      <Transition.In type="slide-bottom" durationMs={600} interpolation="easeIn" />
     </Transition.Together>
   )
 }

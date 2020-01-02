@@ -6,8 +6,9 @@ import ActionButton from './ActionButton'
 
 const Form = ({ inputs, action, onSubmit }) => {
   const [controls, setControls] = useState(inputs)
-
   const inputRefs = {}
+  const placeholderColor = '#777'
+
   const focusField = key => inputRefs[key].focus()
 
   const inputChangedHandler = (text, id) => {
@@ -23,7 +24,7 @@ const Form = ({ inputs, action, onSubmit }) => {
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {
-    config['placeholderTextColor'] = '#777'
+    config['placeholderTextColor'] = placeholderColor
     if (config.isMediaInput)
       config['onTouchStart'] = () => uploadImage(id)
     if (i === 0)

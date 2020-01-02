@@ -1,8 +1,9 @@
 import React from 'react'
 
+import InfoHeader from '../UI/InfoHeader'
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
-import { CenteredContainer, StyledHeader } from '../Styled'
+import { CenteredContainer } from '../Styled'
 
 const signInInputs = [
   {
@@ -25,8 +26,11 @@ const signInInputs = [
 
 const SignIn = ({ navigation }) => (
   <CenteredContainer>
-    <StyledHeader>Please, log in.</StyledHeader>
-    <Form action="Log In" inputs={signInInputs} onSubmit={() => navigation.navigate('EmployeeInfo')} />
+    <InfoHeader text="Please, log in." />
+    <Form
+      action="Log In"
+      inputs={signInInputs}
+      onSubmit={() => navigation.navigate('EmployeeInfo')} />
   </CenteredContainer>
 )
 
