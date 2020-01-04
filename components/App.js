@@ -1,6 +1,7 @@
 import React from 'react'
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
-import { StackViewTransitionConfigs, createStackNavigator } from 'react-navigation-stack'
+import { SafeAreaView } from 'react-native'
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 
 import SignIn from './Screens/SignIn'
 import AddEmployee from './Screens/AddEmployee'
@@ -14,9 +15,17 @@ const routes = {
   EmployeeInfo
 }
 
-export default createAppContainer(createStackNavigator(routes, {
+const AppContainer = createAppContainer(createStackNavigator(routes, {
   defaultNavigationOptions: {
     gesturesEnabled: false
   },
-  headerMode: 'none',
+  headerMode: 'none'
 }))
+
+const App = () => (
+  <SafeAreaView style={{ flex: 1 }}>
+    <AppContainer />
+  </SafeAreaView>
+)
+
+export default App
