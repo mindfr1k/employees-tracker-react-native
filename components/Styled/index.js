@@ -1,18 +1,17 @@
 import styled from 'styled-components/native'
 
-export const CenteredContainer = styled.View`
+export const CenteredContainer = styled.SafeAreaView`
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 
-export const TopContainer = styled.View`
+export const TopContainer = styled.SafeAreaView`
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 10px;
 `
 
 export const StyledForm = styled.View`
@@ -60,8 +59,9 @@ export const StyledButton = styled.Text`
 `
 
 export const StyledSearch = styled.View`
+  display: flex;
+  flex-direction: row;
   width: 95%;
-  position: relative;
   margin: 8px auto;
   padding: 5px;
   background-color: #ededed;
@@ -72,8 +72,7 @@ export const StyledSearch = styled.View`
 `
 
 export const SearchInput = styled.TextInput`
-  position: absolute;
   width: 100%;
-  left: 16px;
   padding: 5px;
+  flex: 1;
 `
