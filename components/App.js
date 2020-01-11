@@ -1,13 +1,13 @@
 import React from 'react'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import { Text, SafeAreaView } from 'react-native'
 
 import SignIn from './Screens/SignIn'
 import AddEmployee from './Screens/AddEmployee'
 import UpdateEmployee from './Screens/UpdateEmployee'
 import EmployeeInfo from './Screens/EmployeeInfo'
 import SearchControl from './UI/SearchControl'
+import AddButton from './UI/AddButton'
 
 const components = {
   SignIn: { screen: SignIn, navigationOptions: { header: null } },
@@ -17,16 +17,17 @@ const components = {
     screen: EmployeeInfo,
     navigationOptions: {
       headerLeft: null,
-      headerTitle: () => <SearchControl placeholderColor="#888" />
+      headerTitle: () => <SearchControl placeholderColor="#888" />,
+      headerRight: () => <AddButton />
     }
   }
 }
 
-
 const App = createAppContainer(createStackNavigator(components, {
   defaultNavigationOptions: {
     gesturesEnabled: false
-  }
+  },
+  headerLayoutPreset: 'left'
 }))
 
 export default App
