@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text } from 'react-native'
+
+import { StyledGlyph } from '../Styled'
 
 const AddButton = () => (
-  <Text style={{margin: 8, textAlign: 'center'}}>+</Text>
+  <StyledGlyph>+</StyledGlyph>
 )
 
 export default AddButton

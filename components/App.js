@@ -18,7 +18,7 @@ const components = {
     navigationOptions: {
       headerLeft: null,
       headerTitle: () => <SearchControl placeholderColor="#888" />,
-      headerRight: () => <AddButton />
+      // headerRight: () => <AddButton placeholderColor="#888" />
     }
   }
 }

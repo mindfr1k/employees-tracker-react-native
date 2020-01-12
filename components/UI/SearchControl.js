@@ -5,7 +5,7 @@ import { StyledSearch, SearchInput } from '../Styled'
 
 const SearchControl = ({ placeholderColor, navigation }) => (
   <StyledSearch>
-    <Icon name="search" size={16} color={placeholderColor}></Icon>
+    <Icon name="search" size={16} color={placeholderColor} />
     <SearchInput
       placeholderTextColor={placeholderColor}
       placeholder="Search"

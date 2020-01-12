@@ -61,8 +61,8 @@ export const StyledButton = styled.Text`
 export const StyledSearch = styled.View`
   display: flex;
   flex-direction: row;
-  width: 95%;
-  margin: 8px auto;
+  width: 90%;
+  margin: 8px;
   padding: 5px;
   background-color: #ededed;
   border-top-left-radius: 5px;
@@ -75,4 +75,10 @@ export const SearchInput = styled.TextInput`
   width: 100%;
   padding: 5px;
   flex: 1;
+`
+
+export const StyledGlyph = styled.Text`
+  font-size: 24px;
+  background-color: red;
+  color: #0a7aff;
 `
