@@ -3,7 +3,7 @@ import { Transitioning, Transition } from 'react-native-reanimated'
 
 import { StyledOpacity, StyledButton } from '../Styled'
 
-const ActionButton = ({ title, onPress }) => {
+const ActionButton = ({ title, color, onPress }) => {
   const [scale, setScale] = useState(1)
   const ref = useRef()
 
@@ -13,6 +13,7 @@ const ActionButton = ({ title, onPress }) => {
       ref={ref}
       transition={transition}>
       <StyledOpacity
+        color={color}
         style={{ transform: [{ scaleX: scale }] }}
         onPressIn={() => {
           ref.current.animateNextTransition()

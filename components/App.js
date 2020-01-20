@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-native'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 
@@ -7,7 +8,7 @@ import AddEmployee from './Screens/AddEmployee'
 import UpdateEmployee from './Screens/UpdateEmployee'
 import EmployeeInfo from './Screens/EmployeeInfo'
 import SearchControl from './UI/SearchControl'
-import AddButton from './UI/AddButton'
+import { TitleHeaderContainer, RightHeaderContainer } from './Styled'
 
 const components = {
   SignIn: { screen: SignIn, navigationOptions: { header: null } },
@@ -17,8 +18,17 @@ const components = {
     screen: EmployeeInfo,
     navigationOptions: {
       headerLeft: null,
-      headerTitle: () => <SearchControl placeholderColor="#888" />,
-      // headerRight: () => <AddButton placeholderColor="#888" />
+      headerTitle: () => (
+        <TitleHeaderContainer>
+          <SearchControl placeholderColor="#888" />
+        </TitleHeaderContainer>
+      ),
+      headerRight: () => (
+        <RightHeaderContainer>
+          <Button title="+" color="#0a7aff" onPress={() => console.log('works')}>
+          </Button>
+        </RightHeaderContainer>
+      )
     }
   }
 }

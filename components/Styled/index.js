@@ -35,20 +35,15 @@ export const StyledInput = styled.TextInput`
 `
 
 export const StyledHeader = styled.Text`
-  width: 100%;
   font-size: 16px;
   font-weight: 500;
   text-align: center;
 `
 
 export const StyledOpacity = styled.TouchableOpacity`
-  width: 100%;
-  margin-top: 8px;
-  background-color: #008bd1;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  margin: 8px 0;
+  background-color: ${({ color }) => color};
+  border-radius: 5px;
 `
 
 export const StyledButton = styled.Text`
@@ -58,10 +53,14 @@ export const StyledButton = styled.Text`
   padding: 10px;
 `
 
+export const TitleHeaderContainer = styled.View`
+  width: 90%;
+`
+
 export const StyledSearch = styled.View`
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 100%;
   margin: 8px;
   padding: 5px;
   background-color: #ededed;
@@ -72,13 +71,12 @@ export const StyledSearch = styled.View`
 `
 
 export const SearchInput = styled.TextInput`
-  width: 100%;
-  padding: 5px;
+  padding-left: 5px;
   flex: 1;
 `
 
-export const StyledGlyph = styled.Text`
-  font-size: 24px;
-  background-color: red;
-  color: #0a7aff;
+export const RightHeaderContainer = styled.View`
+  padding-right: 10px;
+  width: 100%;
+  text-align: center;
 `
