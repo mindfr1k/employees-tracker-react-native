@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button } from 'react-native'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
@@ -18,7 +19,7 @@ const HeaderContainer = () => {
 
   const headerButton = isSearchFocused
     ? <HeaderButton title="Cancel" />
-    : <HeaderButton title="+" />
+    : <Button title="+" />
   return (
     <StyledHeaderContainer>
       <SearchFieldContainer flex={flexValue}>

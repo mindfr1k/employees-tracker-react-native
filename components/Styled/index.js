@@ -17,11 +17,12 @@ export const TopContainer = styled.SafeAreaView`
 export const StyledHeaderContainer = styled.View`
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 98%;
 `
 
 export const HeaderButtonContainer = styled.TouchableOpacity`
-  margin: 8px 0;
+  text-align: center;
   flex: 1;
 `
 
