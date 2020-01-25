@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { Transitioning, Transition } from 'react-native-reanimated'
 
-import { StyledOpacity, StyledButton } from '../Styled'
+import { ActionOpacity, StyledButton } from '../Styled'
 
-const ActionButton = ({ title, color, onPress }) => {
+const ActionButton = ({ title, onPress }) => {
   const [scale, setScale] = useState(1)
   const ref = useRef()
 
@@ -12,8 +12,7 @@ const ActionButton = ({ title, color, onPress }) => {
     <Transitioning.View style={{ width: '100%' }}
       ref={ref}
       transition={transition}>
-      <StyledOpacity
-        color={color}
+      <ActionOpacity
         style={{ transform: [{ scaleX: scale }] }}
         onPressIn={() => {
           ref.current.animateNextTransition()
@@ -24,8 +23,12 @@ const ActionButton = ({ title, color, onPress }) => {
           setScale(1)
         }}
         onPress={onPress}>
-        <StyledButton>{title}</StyledButton>
-      </StyledOpacity>
+        <StyledButton
+          color="white"
+          fontSize="18px">
+          {title}
+        </StyledButton>
+      </ActionOpacity>
     </Transitioning.View>
   )
 }

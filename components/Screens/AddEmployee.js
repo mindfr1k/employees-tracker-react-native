@@ -52,7 +52,7 @@ const addEmployeeInputs = [
   }
 ]
 
-const AddEmployee = ({ navigation }) => (
+const AddEmployee = () => (
   <TopContainer>
     <Form action="Add Employee" inputs={addEmployeeInputs} />
   </TopContainer>

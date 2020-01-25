@@ -14,6 +14,21 @@ export const TopContainer = styled.SafeAreaView`
   justify-content: flex-start;
 `
 
+export const StyledHeaderContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+`
+
+export const HeaderButtonContainer = styled.TouchableOpacity`
+  margin: 8px 0;
+  flex: 1;
+`
+
+export const SearchFieldContainer = styled.View`
+  flex: ${({ flex }) => flex};
+`
+
 export const StyledForm = styled.View`
   display: flex;
   flex-direction: column;
@@ -40,43 +55,29 @@ export const StyledHeader = styled.Text`
   text-align: center;
 `
 
-export const StyledOpacity = styled.TouchableOpacity`
+export const ActionOpacity = styled.TouchableOpacity`
   margin: 8px 0;
-  background-color: ${({ color }) => color};
+  background-color: #008bd1;
   border-radius: 5px;
 `
 
 export const StyledButton = styled.Text`
   text-align: center;
-  color: white;
-  font-size: 18px;
-  padding: 10px;
-`
-
-export const TitleHeaderContainer = styled.View`
-  width: 90%;
+  color: ${({ color }) => color};
+  font-size: ${({ fontSize }) => fontSize};
+  padding: ${({ fontSize }) => `${Math.floor(parseInt(fontSize) / 1.8)}px`};
 `
 
 export const StyledSearch = styled.View`
   display: flex;
   flex-direction: row;
-  width: 100%;
   margin: 8px;
   padding: 5px;
   background-color: #ededed;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-radius: 5px;
 `
 
 export const SearchInput = styled.TextInput`
   padding-left: 5px;
   flex: 1;
-`
-
-export const RightHeaderContainer = styled.View`
-  padding-right: 10px;
-  width: 100%;
-  text-align: center;
 `

@@ -55,7 +55,7 @@ const Form = ({ inputs, action, navigation }) => {
   return (
     <StyledForm>
       {formInputs}
-      <ActionButton title={action} color="#008bd1" onPress={submitHandler} />
+      <ActionButton title={action} onPress={submitHandler} />
     </StyledForm>
   )
 }
