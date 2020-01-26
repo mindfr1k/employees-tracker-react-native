@@ -26,10 +26,6 @@ export const HeaderButtonContainer = styled.TouchableOpacity`
   flex: 1;
 `
 
-export const SearchFieldContainer = styled.View`
-  flex: ${({ flex }) => flex};
-`
-
 export const StyledForm = styled.View`
   display: flex;
   flex-direction: column;
