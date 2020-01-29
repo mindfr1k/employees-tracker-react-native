@@ -22,8 +22,7 @@ export const StyledHeaderContainer = styled.View`
 `
 
 export const HeaderButtonContainer = styled.TouchableOpacity`
-  text-align: center;
-  flex: 1;
+  margin: 8px 0;
 `
 
 export const StyledForm = styled.View`

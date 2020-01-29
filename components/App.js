@@ -16,13 +16,13 @@ const components = {
     screen: EmployeeInfo,
     navigationOptions: {
       headerLeft: null,
-      headerTitle: () => <HeaderContainer />,
+      headerTitle: () => <HeaderContainer />
     }
   },
 }
 
 const App = createAppContainer(createStackNavigator(components, {
-  initialRouteName: 'EmployeeInfo',
+  initialRouteName: 'SignIn',
   defaultNavigationOptions: {
     gesturesEnabled: false
   },
