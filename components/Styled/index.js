@@ -77,3 +77,7 @@ export const SearchInput = styled.TextInput`
   padding-left: 5px;
   flex: 1;
 `
+
+export const CardContainer = styled.View`
+  border: 1px solid #eee;
+`

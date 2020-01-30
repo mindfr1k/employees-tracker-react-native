@@ -1,13 +1,24 @@
 import React from 'react'
+import { FlatList } from 'react-native'
 
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
-import { TopContainer, StyledHeader } from '../Styled'
+import Card from '../UI/Card'
+import { TopContainer } from '../Styled'
 
-const EmployeeInfo = ({ navigation: { state: { params = {} } } }) => {
-  const msg = Object.keys(params).map(key => `${key}: ${params[key]}`).join(', ')
+const data = [
+  {
+    id: 1,
+    text: 'Rofl'
+  }
+]
+
+const EmployeeInfo = () => {
   return (
     <TopContainer>
-      <StyledHeader>{msg}</StyledHeader>
+      <FlatList 
+      data={data}
+      renderItem={({ item: { text } }) => <Card title={text} />}
+      keyExtractor={({ id }) => id} />
     </TopContainer>
   )
 }
