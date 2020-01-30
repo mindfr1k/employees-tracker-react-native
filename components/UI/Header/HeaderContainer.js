@@ -1,48 +1,41 @@
-import React, { useState, useRef } from 'react'
-import { View, Button } from 'react-native'
-import { Transition, Transitioning } from 'react-native-reanimated'
+import React, { useState } from 'react'
+import { TouchableOpacity, Button, Animated } from 'react-native'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
 import { StyledHeaderContainer } from '../../Styled'
 
+const flex = new Animated.Value(12)
+
 const HeaderContainer = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
-  const [horizontalOffset, setHorizontalOffset] = useState('-100%')
-  const ref = useRef()
-
+  const animateFlex = toValue => Animated.timing(flex, {
+    toValue,
+    duration: 400
+  })
   const onFocus = () => {
-    ref.current.animateNextTransition()
-    setHorizontalOffset('100%')
+    setIsSearchFocused(true)
+    animateFlex(5).start()
   }
-
   const onBlur = () => {
-    ref.current.animateNextTransition()
     setIsSearchFocused(false)
+    animateFlex(12).start()
   }
-
   const headerButton = isSearchFocused
     ? <HeaderButton title="Cancel" />
     : <Button title="+" />
-
-  const transition = <Transition.Change durationMs={500} interpolation="easeIn" />
   return (
-    <Transitioning.View
-      style={{ width: '100%' }}
-      ref={ref}
-      transition={transition}>
-      <StyledHeaderContainer>
+    <StyledHeaderContainer>
+      <Animated.View style={{ flex }}>
         <SearchControl
-          style={{ flex: 12 }}
           placeholderColor="#888"
           onFocus={onFocus}
           onBlur={onBlur} />
-        <View
-          style={{ transform: [{ translateX: horizontalOffset }] }}>
-          {headerButton}
-        </View>
-      </StyledHeaderContainer>
-    </Transitioning.View>
+      </Animated.View>
+      <TouchableOpacity style={{ flex: 1 }}>
+        {headerButton}
+      </TouchableOpacity>
+    </StyledHeaderContainer>
   )
 }
 
