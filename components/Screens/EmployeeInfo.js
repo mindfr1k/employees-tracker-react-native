@@ -7,7 +7,7 @@ import { TopContainer } from '../Styled'
 
 const data = [
   {
-    id: 1,
+    id: '1',
     text: 'Rofl'
   }
 ]

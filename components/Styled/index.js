@@ -75,9 +75,13 @@ export const StyledSearch = styled.View`
 
 export const SearchInput = styled.TextInput`
   padding-left: 5px;
+  color: #000;
   flex: 1;
 `
 
 export const CardContainer = styled.View`
+  margin: 8px;
   border: 1px solid #eee;
+  display: flex;
+  align-items: center;
 `

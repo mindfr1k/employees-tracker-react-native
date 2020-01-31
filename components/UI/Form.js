@@ -25,8 +25,7 @@ const Form = ({ inputs, action, navigation }) => {
   }
 
   const submitHandler = () => {
-    const params = controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {})
-    navigation.navigate('EmployeeInfo', params)
+    navigation.navigate('EmployeeInfo')
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {

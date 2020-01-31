@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, Button, Animated } from 'react-native'
+import { TouchableOpacity, Button, Animated, Keyboard } from 'react-native'
+import { withNavigation } from 'react-navigation'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
@@ -7,11 +8,11 @@ import { StyledHeaderContainer } from '../../Styled'
 
 const flex = new Animated.Value(12)
 
-const HeaderContainer = () => {
+const HeaderContainer = ({ navigation }) => {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const animateFlex = toValue => Animated.timing(flex, {
     toValue,
-    duration: 400
+    duration: 300
   })
   const onFocus = () => {
     setIsSearchFocused(true)
@@ -22,8 +23,15 @@ const HeaderContainer = () => {
     animateFlex(12).start()
   }
   const headerButton = isSearchFocused
-    ? <HeaderButton title="Cancel" />
-    : <Button title="+" />
+    ? <HeaderButton
+      title="Cancel"
+      onPress={() => {
+        Keyboard.dismiss()
+        onBlur()
+      }} />
+    : <Button
+      title="+"
+      onPress={() => navigation.navigate('AddEmployee')} />
   return (
     <StyledHeaderContainer>
       <Animated.View style={{ flex }}>
@@ -39,4 +47,4 @@ const HeaderContainer = () => {
   )
 }
 
-export default HeaderContainer
+export default withNavigation(HeaderContainer)

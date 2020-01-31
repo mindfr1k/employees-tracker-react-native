@@ -2,7 +2,7 @@ import React from 'react'
 
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
-import { TopContainer } from '../Styled'
+import { CenteredContainer } from '../Styled'
 
 const addEmployeeInputs = [
   {
@@ -53,9 +53,9 @@ const addEmployeeInputs = [
 ]
 
 const AddEmployee = () => (
-  <TopContainer>
+  <CenteredContainer>
     <Form action="Add Employee" inputs={addEmployeeInputs} />
-  </TopContainer>
+  </CenteredContainer>
 )
 
 export default withKeyboardDismiss(AddEmployee)

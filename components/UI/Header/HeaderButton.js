@@ -2,10 +2,12 @@ import React from 'react'
 
 import { HeaderButtonContainer, StyledButton } from '../../Styled'
 
-const HeaderButton = ({ title }) => {
+const HeaderButton = ({ title, onPress }) => {
   return (
-    <HeaderButtonContainer>
+    <HeaderButtonContainer
+      onPress={onPress}>
       <StyledButton
+        suppressHighlighting
         color="#008bd1"
         fontSize="14px">
         {title}

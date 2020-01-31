@@ -4,14 +4,13 @@ import { withNavigation } from 'react-navigation'
 
 import { StyledSearch, SearchInput } from '../Styled'
 
-const SearchControl = ({ placeholderColor, onFocus, onBlur, navigation }) => {
-
+const SearchControl = ({ placeholderColor, onFocus, onBlur }) => {
   return (
     <StyledSearch>
       <Icon name="search" size={16} color={placeholderColor} />
       <SearchInput
         placeholderTextColor={placeholderColor}
-        placeholder="Search"
+        placeholder="Enter id or surname"
         onFocus={onFocus}
         onBlur={onBlur} />
     </StyledSearch>
