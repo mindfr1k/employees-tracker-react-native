@@ -9,6 +9,8 @@ const SearchControl = ({ placeholderColor, onFocus, onBlur }) => {
     <StyledSearch>
       <Icon name="search" size={16} color={placeholderColor} />
       <SearchInput
+        autoCorrect={false}
+        enablesReturnKeyAutomatically
         placeholderTextColor={placeholderColor}
         placeholder="Enter id or surname"
         onFocus={onFocus}

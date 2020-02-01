@@ -11,7 +11,6 @@ const addEmployeeInputs = [
     value: '',
     returnKeyType: 'next',
     first: true,
-    blurOnSubmit: false,
     isMediaInput: true
   },
   {
@@ -20,35 +19,36 @@ const addEmployeeInputs = [
     value: '',
     autoFocus: true,
     returnKeyType: 'next',
-    blurOnSubmit: false
+    autoCorrect: false
   },
   {
     id: 'name',
     placeholder: 'Name',
     value: '',
     returnKeyType: 'next',
-    blurOnSubmit: false
+    autoCorrect: false
   },
   {
     id: 'secondName',
     placeholder: 'Second Name',
     value: '',
     returnKeyType: 'next',
-    blurOnSubmit: false
+    autoCorrect: false
   },
   {
     id: 'position',
     placeholder: 'Position',
     value: '',
     returnKeyType: 'next',
-    blurOnSubmit: false
+    autoCorrect: false
   },
   {
     id: 'personnelNumber',
     placeholder: 'Personnel Number',
     value: '',
     last: true,
-    returnKeyType: 'done'
+    returnKeyType: 'done',
+    autoCorrect: false
   }
 ]
 
