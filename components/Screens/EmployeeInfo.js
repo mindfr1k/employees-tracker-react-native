@@ -15,10 +15,14 @@ const data = [
 const EmployeeInfo = () => {
   return (
     <TopContainer>
-      <FlatList 
-      data={data}
-      renderItem={({ item: { text } }) => <Card title={text} />}
-      keyExtractor={({ id }) => id} />
+      <FlatList
+        data={data}
+        renderItem={({ item: { text } }) => (
+          <Card
+            title={text}
+            text={text} />
+        )}
+        keyExtractor={({ id }) => id} />
     </TopContainer>
   )
 }

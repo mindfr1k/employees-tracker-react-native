@@ -45,7 +45,7 @@ export const StyledInput = styled.TextInput`
   margin-top: -1px;
 `
 
-export const StyledHeader = styled.Text`
+export const StyledText = styled.Text`
   font-size: 16px;
   font-weight: 500;
   text-align: center;
@@ -80,8 +80,22 @@ export const SearchInput = styled.TextInput`
 `
 
 export const CardContainer = styled.View`
-  margin: 8px;
-  border: 1px solid #eee;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14);
   display: flex;
   align-items: center;
+`
+
+export const CardHeader = styled.Text`
+  font-size: 20px;
+`
+
+export const CardText = styled.Text`
+  width: 100%;
+  text-align: center;
+  padding: 10px;
 `

@@ -1,9 +1,8 @@
 import React from 'react'
 
-import InfoHeader from '../UI/InfoHeader'
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
-import { CenteredContainer } from '../Styled'
+import { CenteredContainer, StyledText } from '../Styled'
 
 const signInInputs = [
   {
@@ -26,7 +25,7 @@ const signInInputs = [
 
 const SignIn = () => (
   <CenteredContainer>
-    <InfoHeader text="Please, log in." />
+    <StyledText>Please, log in.</StyledText>
     <Form
       action="Log In"
       inputs={signInInputs} />

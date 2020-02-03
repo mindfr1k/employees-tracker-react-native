@@ -1,11 +1,14 @@
 import React from 'react'
+import { View } from 'react-native'
 
-import { CardContainer, StyledHeader } from '../Styled'
+import { CardContainer, CardHeader, CardText } from '../Styled'
 
-const Card = ({ title }) => {
+const Card = ({ title, text }) => {
   return (
     <CardContainer>
-      <StyledHeader>{title}</StyledHeader>
+      <CardHeader>{title}</CardHeader>
+      <CardText>{text}</CardText>
+      <View style={{ width: '100%', borderBottomWidth: 1, borderBottomColor: '#ddd' }} />
     </CardContainer>
   )
 }
