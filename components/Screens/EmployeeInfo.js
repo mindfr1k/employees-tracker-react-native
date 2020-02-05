@@ -9,10 +9,18 @@ const data = [
   {
     id: '12839812938',
     personnelName: '1',
-    surname: 'Redneck',
-    name: 'Billy',
+    surname: 'Simple',
+    name: 'Guy',
     secondName: 'Redundant',
     position: 'Factory worker'
+  },
+  {
+    id: '12839812939',
+    personnelName: '2',
+    surname: 'Eloquent',
+    name: 'Dude',
+    secondName: 'Redundant',
+    position: 'Packager'
   }
 ]
 

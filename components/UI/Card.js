@@ -9,7 +9,7 @@ const Card = ({ navigation, surname, name, personnelName, position }) => {
     <CardContainer>
       <CardHeader>{`${surname} ${name}`}</CardHeader>
       <CardText>Personnel number:
-        <Text style={{ fontWeight: "bold" }}>
+        <Text style={{ fontWeight: 'bold' }}>
           {` ${personnelName}`}
         </Text>
         {`\n${position}`}
