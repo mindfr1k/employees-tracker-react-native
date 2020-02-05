@@ -7,8 +7,12 @@ import { TopContainer } from '../Styled'
 
 const data = [
   {
-    id: '1',
-    text: 'Rofl'
+    id: '12839812938',
+    personnelName: '1',
+    surname: 'Redneck',
+    name: 'Billy',
+    secondName: 'Redundant',
+    position: 'Factory worker'
   }
 ]
 
@@ -17,11 +21,10 @@ const EmployeeInfo = () => {
     <TopContainer>
       <FlatList
         data={data}
-        renderItem={({ item: { text } }) => (
-          <Card
-            title={text}
-            text={text} />
-        )}
+        renderItem={({ item }) => {
+          const { id, secondName, ...rest } = item
+          return <Card {...rest} />
+        }}
         keyExtractor={({ id }) => id} />
     </TopContainer>
   )

@@ -1,10 +1,11 @@
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
 
-import { HeaderButtonContainer, StyledButton } from '../../Styled'
+import { StyledButton } from '../../Styled'
 
 const HeaderButton = ({ title, onPress }) => {
   return (
-    <HeaderButtonContainer
+    <TouchableOpacity
       onPress={onPress}>
       <StyledButton
         suppressHighlighting
@@ -12,7 +13,7 @@ const HeaderButton = ({ title, onPress }) => {
         fontSize="14px">
         {title}
       </StyledButton>
-    </HeaderButtonContainer>
+    </TouchableOpacity>
   )
 }
 

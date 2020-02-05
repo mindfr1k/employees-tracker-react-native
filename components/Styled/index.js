@@ -21,10 +21,6 @@ export const StyledHeaderContainer = styled.View`
   width: 98%;
 `
 
-export const HeaderButtonContainer = styled.TouchableOpacity`
-  margin: 8px 0;
-`
-
 export const StyledForm = styled.View`
   display: flex;
   flex-direction: column;
@@ -80,14 +76,14 @@ export const SearchInput = styled.TextInput`
 `
 
 export const CardContainer = styled.View`
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14);
   display: flex;
   align-items: center;
+  background-color: #fff;
+  margin: 10px;
+  padding: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14);
 `
 
 export const CardHeader = styled.Text`
@@ -98,4 +94,11 @@ export const CardText = styled.Text`
   width: 100%;
   text-align: center;
   padding: 10px;
+`
+
+export const CardSeparator = styled.View`
+  width: 100%;
+  margin: 0 5px 5px 5px;
+  border-bottom-width: 1px;
+  border-bottom-color: #ddd;
 `
