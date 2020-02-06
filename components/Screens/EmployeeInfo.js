@@ -30,7 +30,7 @@ const EmployeeInfo = () => {
       <FlatList
         data={data}
         renderItem={({ item }) => {
-          const { id, secondName, ...rest } = item
+          const { secondName, ...rest } = item
           return <Card {...rest} />
         }}
         keyExtractor={({ id }) => id} />

@@ -1,10 +1,10 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity, Text, Alert } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 import { CardContainer, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
 
-const Card = ({ navigation, surname, name, personnelName, position }) => {
+const Card = ({ navigation, id, surname, name, personnelName, position }) => {
   return (
     <CardContainer>
       <CardHeader>{`${surname} ${name}`}</CardHeader>
@@ -23,7 +23,15 @@ const Card = ({ navigation, surname, name, personnelName, position }) => {
           EDIT
         </StyledButton>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => Alert.alert(`Delete ${surname} ${name}`, 
+        'Do you want to delete info about this employee?', 
+        [{
+            text: 'Cancel'
+          }, {
+            text: 'OK',
+            style: 'destructive'
+          }])}>
         <StyledButton
           color="#f00"
           fontSize="14">
