@@ -49,6 +49,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>For uploading employees' photos</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>For uploading employees' photos</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
