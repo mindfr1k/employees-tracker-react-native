@@ -15,7 +15,7 @@ const Form = ({ inputs, action, navigation }) => {
   const inputChangedHandler = (text, id) => {
     setControls(controls.map(control => control.id === id ? { ...control, value: text } : control))
   }
-
+  
   const uploadImage = id => {
     setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
     ImagePicker.showImagePicker({
