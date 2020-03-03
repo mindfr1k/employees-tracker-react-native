@@ -15,7 +15,7 @@ const Form = ({ inputs, action, navigation }) => {
   const inputChangedHandler = (text, id) => {
     setControls(controls.map(control => control.id === id ? { ...control, value: text } : control))
   }
-  
+
   const uploadImage = id => {
     setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
     ImagePicker.showImagePicker({
@@ -27,6 +27,12 @@ const Form = ({ inputs, action, navigation }) => {
     })
   }
 
+  const editingSubmittedHandler = (validationSchema, id) => {
+    setControls(controls.map(control => control.id === id
+      ? { ...control, valid: validate(control.value, validationSchema) }
+      : control))
+  }
+
   const submitHandler = () => {
     navigation.navigate('EmployeeInfo')
   }
@@ -35,6 +41,7 @@ const Form = ({ inputs, action, navigation }) => {
     config['placeholderTextColor'] = placeholderColor
     if (config.isMediaInput)
       config['onTouchStart'] = () => uploadImage(id)
+    const { validation } = config
     if (i === 0)
       return <StyledInput
         key={id}

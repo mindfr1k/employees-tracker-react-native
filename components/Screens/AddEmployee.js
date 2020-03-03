@@ -19,28 +19,41 @@ const addEmployeeInputs = [
     value: '',
     autoFocus: true,
     returnKeyType: 'next',
-    autoCorrect: false
+    autoCorrect: false,
+    enablesReturnKeyAutomatically: true,
+    validation: {
+      required: true
+    }
   },
   {
     id: 'name',
     placeholder: 'Name',
     value: '',
     returnKeyType: 'next',
-    autoCorrect: false
+    autoCorrect: false,
+    validation: {
+      
+    }
   },
   {
     id: 'secondName',
     placeholder: 'Second Name',
     value: '',
     returnKeyType: 'next',
-    autoCorrect: false
+    autoCorrect: false,
+    validation: {
+      
+    }
   },
   {
     id: 'position',
     placeholder: 'Position',
     value: '',
     returnKeyType: 'next',
-    autoCorrect: false
+    autoCorrect: false,
+    validation: {
+      
+    }
   },
   {
     id: 'personnelNumber',
@@ -48,7 +61,10 @@ const addEmployeeInputs = [
     value: '',
     last: true,
     returnKeyType: 'done',
-    autoCorrect: false
+    autoCorrect: false,
+    validation: {
+      
+    }
   }
 ]
 
