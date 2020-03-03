@@ -64,8 +64,3 @@ ios/EmployeesTrackerReactNative-tvOSTests/
 ios/EmployeesTrackerReactNative.xcworkspace/
 ios/EmployeesTrackerReactNativeTests/
 ios/instrumentscli0.trace/
-
-# Locks
-ios/Podfile.lock
-yarn.lock
-package-lock.json
