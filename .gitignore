@@ -59,11 +59,9 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-/ios/EmployeesTrackerReactNative-tvOS
-/ios/EmployeesTrackerReactNative-tvOSTests
-/ios/EmployeesTrackerReactNative.xcodeproj
-/ios/EmployeesTrackerReactNative.xcworkspace
-/ios/EmployeesTrackerReactNativeTests
-/ios/instrumentscli0.trace
-
-Podfile.lock
+ios/EmployeesTrackerReactNative-tvOS/
+ios/EmployeesTrackerReactNative-tvOSTests/
+ios/EmployeesTrackerReactNative.xcodeproj/
+ios/EmployeesTrackerReactNative.xcworkspace/
+ios/EmployeesTrackerReactNativeTests/
+ios/instrumentscli0.trace/
