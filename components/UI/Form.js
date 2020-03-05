@@ -28,12 +28,6 @@ const Form = ({ inputs, action, navigation }) => {
     })
   }
 
-  const editingSubmittedHandler = (validationSchema, id) => {
-    setControls(controls.map(control => control.id === id
-      ? { ...control, valid: validate(control.value, validationSchema) }
-      : control))
-  }
-
   const submitHandler = () => {
     navigation.navigate('EmployeeInfo')
   }
