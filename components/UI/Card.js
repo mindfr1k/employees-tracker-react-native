@@ -4,7 +4,9 @@ import { withNavigation } from 'react-navigation'
 
 import { CardContainer, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
 
-const Card = ({ navigation, id, surname, name, personnelName, position }) => {
+const cardFontSize = 14
+
+const Card = ({ navigation, surname, name, personnelName, position }) => {
   return (
     <CardContainer>
       <CardHeader>{`${surname} ${name}`}</CardHeader>
@@ -19,14 +21,14 @@ const Card = ({ navigation, id, surname, name, personnelName, position }) => {
         onPress={() => navigation.navigate('UpdateEmployee')}>
         <StyledButton
           color="#008bd1"
-          fontSize="14">
+          fontSize={cardFontSize}>
           EDIT
         </StyledButton>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => Alert.alert(`Delete ${surname} ${name}`, 
-        'Do you want to delete info about this employee?', 
-        [{
+        onPress={() => Alert.alert(`Delete ${surname} ${name}`,
+          'Do you want to delete info about this employee?',
+          [{
             text: 'Cancel'
           }, {
             text: 'OK',
@@ -34,7 +36,7 @@ const Card = ({ navigation, id, surname, name, personnelName, position }) => {
           }])}>
         <StyledButton
           color="#f00"
-          fontSize="14">
+          fontSize={cardFontSize}>
           DELETE
         </StyledButton>
       </TouchableOpacity>

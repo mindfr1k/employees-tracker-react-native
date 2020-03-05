@@ -5,10 +5,11 @@ import ImagePicker from 'react-native-image-picker'
 import { StyledForm, StyledInput } from '../Styled'
 import ActionButton from './ActionButton'
 
+const placeholderColor = '#777'
+
 const Form = ({ inputs, action, navigation }) => {
   const [controls, setControls] = useState(inputs)
   const inputRefs = useRef({})
-  const placeholderColor = '#777'
 
   const focusField = key => inputRefs.current[key].focus()
 

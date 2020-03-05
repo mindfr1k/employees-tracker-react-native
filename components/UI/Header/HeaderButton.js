@@ -10,7 +10,7 @@ const HeaderButton = ({ title, onPress }) => {
       <StyledButton
         suppressHighlighting
         color="#008bd1"
-        fontSize="14px">
+        fontSize="14">
         {title}
       </StyledButton>
     </TouchableOpacity>

@@ -18,7 +18,7 @@ const ActionButton = ({ title, onPress }) => {
       onPress={onPress}>
       <StyledButton
         color="white"
-        fontSize="18px">
+        fontSize="18">
         {title}
       </StyledButton>
     </ActionOpacity>
