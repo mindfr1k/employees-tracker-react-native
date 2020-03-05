@@ -36,7 +36,6 @@ const Form = ({ inputs, action, navigation }) => {
     config['placeholderTextColor'] = placeholderColor
     if (config.isMediaInput)
       config['onTouchStart'] = () => uploadImage(id)
-    const { validation } = config
     if (i === 0)
       return <StyledInput
         key={id}
