@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Alert } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import ImagePicker from 'react-native-image-picker'
 
@@ -21,33 +22,46 @@ const Form = ({ inputs, action, navigation }) => {
     setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
     ImagePicker.showImagePicker({
       title: 'Select employee photo'
-    }, ({ error, fileName }) => {
+    }, ({ didCancel, error, fileName }) => {
       if (error)
         console.log(error)
-      setControls(controls.map(control => control.id === id ? { ...control, value: fileName } : control))
+      didCancel
+        ? setControls(controls.map(control => control.id === id ? { ...control, value: '' } : control))
+        : setControls(controls.map(control => {
+          return control.id === id ? { ...control, value: fileName } : control
+        }))
     })
   }
 
-  const editingSubmittedHandler = (validationSchema, id) => {
-    setControls(controls.map(control => control.id === id
-      ? { ...control, valid: validate(control.value, validationSchema) }
-      : control))
-  }
-
   const submitHandler = () => {
-    navigation.navigate('EmployeeInfo')
+    const invalidControl = controls
+      .filter(({ validation }) => validation)
+      .find(({ placeholder, value, validation }, i) => {
+        const { required } = validation
+        if (required && value.trim() === '') {
+          validation['errorMessage'] = `${placeholder} is required!`
+          validation['errorRef'] = `field${i + 1}`
+          return true
+        }
+      })
+    invalidControl
+      ? Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
+        text: 'OK',
+        onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
+      }])
+      : navigation.navigate('EmployeeInfo')
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {
     config['placeholderTextColor'] = placeholderColor
     if (config.isMediaInput)
       config['onTouchStart'] = () => uploadImage(id)
-    const { validation } = config
     if (i === 0)
       return <StyledInput
         key={id}
         {...config}
         onSubmitEditing={() => focusField(`field${i + 2}`)}
+        ref={input => inputRefs.current[`field${i + 1}`] = input}
         onChangeText={text => inputChangedHandler(text, id)} />
     if (i === controls.length - 1)
       return <StyledInput
