@@ -16,6 +16,9 @@ $ cd repo-name
 # install dependencies
 $ npm i
 
+#install cocoa pods dependencies
+$ pod install
+
 # enter development mode
 $ npm start
 ```
