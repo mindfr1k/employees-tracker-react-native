@@ -34,16 +34,21 @@ const Form = ({ inputs, action, navigation }) => {
   }
 
   const submitHandler = () => {
-    const invalidControl = controls.filter(({ validation }) => validation)
-      .find(({ placeholder, value, validation }) => {
+    const invalidControl = controls
+      .filter(({ validation }) => validation)
+      .find(({ placeholder, value, validation }, i) => {
         const { required } = validation
         if (required && value.trim() === '') {
-          validation.error = `${placeholder} is required!`
+          validation['errorMessage'] = `${placeholder} is required!`
+          validation['errorRef'] = `field${i + 1}`
           return true
         }
       })
     invalidControl
-      ? Alert.alert(invalidControl.validation.error, `Please, fix this error.`)
+      ? Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
+        text: 'OK',
+        onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
+      }])
       : navigation.navigate('EmployeeInfo')
   }
 
@@ -56,6 +61,7 @@ const Form = ({ inputs, action, navigation }) => {
         key={id}
         {...config}
         onSubmitEditing={() => focusField(`field${i + 2}`)}
+        ref={input => inputRefs.current[`field${i + 1}`] = input}
         onChangeText={text => inputChangedHandler(text, id)} />
     if (i === controls.length - 1)
       return <StyledInput
