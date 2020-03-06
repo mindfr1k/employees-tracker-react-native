@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Alert } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import ImagePicker from 'react-native-image-picker'
 
@@ -21,15 +22,29 @@ const Form = ({ inputs, action, navigation }) => {
     setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
     ImagePicker.showImagePicker({
       title: 'Select employee photo'
-    }, ({ error, fileName }) => {
+    }, ({ didCancel, error, fileName }) => {
       if (error)
         console.log(error)
-      setControls(controls.map(control => control.id === id ? { ...control, value: fileName } : control))
+      didCancel
+        ? setControls(controls.map(control => control.id === id ? { ...control, value: '' } : control))
+        : setControls(controls.map(control => {
+          return control.id === id ? { ...control, value: fileName } : control
+        }))
     })
   }
 
   const submitHandler = () => {
-    navigation.navigate('EmployeeInfo')
+    const invalidControl = controls.filter(({ validation }) => validation)
+      .find(({ placeholder, value, validation }) => {
+        const { required } = validation
+        if (required && value.trim() === '') {
+          validation.error = `${placeholder} is required!`
+          return true
+        }
+      })
+    invalidControl
+      ? Alert.alert(invalidControl.validation.error, `Please, fix this error.`)
+      : navigation.navigate('EmployeeInfo')
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {

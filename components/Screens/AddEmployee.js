@@ -11,7 +11,10 @@ const addEmployeeInputs = [
     value: '',
     returnKeyType: 'next',
     first: true,
-    isMediaInput: true
+    isMediaInput: true,
+    validation: { 
+      required: true
+    }
   },
   {
     id: 'surname',
@@ -31,8 +34,9 @@ const addEmployeeInputs = [
     value: '',
     returnKeyType: 'next',
     autoCorrect: false,
+    enablesReturnKeyAutomatically: true,
     validation: {
-      
+      required: true
     }
   },
   {
@@ -41,8 +45,9 @@ const addEmployeeInputs = [
     value: '',
     returnKeyType: 'next',
     autoCorrect: false,
+    enablesReturnKeyAutomatically: true,
     validation: {
-      
+      required: true
     }
   },
   {
@@ -51,8 +56,9 @@ const addEmployeeInputs = [
     value: '',
     returnKeyType: 'next',
     autoCorrect: false,
+    enablesReturnKeyAutomatically: true,
     validation: {
-      
+      required: true
     }
   },
   {
@@ -62,8 +68,9 @@ const addEmployeeInputs = [
     last: true,
     returnKeyType: 'done',
     autoCorrect: false,
+    enablesReturnKeyAutomatically: true,
     validation: {
-      
+      required: true
     }
   }
 ]
