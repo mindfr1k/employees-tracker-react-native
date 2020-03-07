@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 
-import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import Card from '../UI/Card'
 import { TopContainer } from '../Styled'
 
@@ -35,9 +34,10 @@ const EmployeeInfo = () => {
           const { secondName, ...rest } = item
           return <Card {...rest} />
         }}
-        keyExtractor={({ id }) => id} />
+        keyExtractor={({ id }) => id}
+        contentContainerStyle={{ flexGrow: 1 }} />
     </TopContainer>
   )
 }
 
-export default withKeyboardDismiss(EmployeeInfo)
+export default EmployeeInfo
