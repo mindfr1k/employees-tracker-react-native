@@ -80,10 +80,16 @@ export const CardContainer = styled.View`
   align-items: center;
   background-color: #fff;
   margin: 10px;
-  padding: 10px 0;
+  padding: 0 10px 0 0;
   border: 1px solid #ddd;
   border-radius: 2px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14);
+`
+
+export const CardImage = styled.Image`
+  margin: 0 0 5px 0;
+  width: 100%;
+  height: 200px;
 `
 
 export const CardHeader = styled.Text`
