@@ -1,14 +1,16 @@
 import React from 'react'
-import { TouchableOpacity, Text, Alert } from 'react-native'
+import { Image, TouchableOpacity, Text, Alert } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
-import { CardContainer, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
+import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
 
 const cardFontSize = 14
 
-const Card = ({ navigation, surname, name, personnelName, position }) => {
+const Card = ({ navigation, profilePic, surname, name, personnelName, position }) => {
   return (
     <CardContainer>
+      <CardImage
+        source={{ uri: profilePic }} />
       <CardHeader>{`${surname} ${name}`}</CardHeader>
       <CardText>Personnel number:
         <Text style={{ fontWeight: 'bold' }}>

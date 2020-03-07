@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 
-import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import Card from '../UI/Card'
 import { TopContainer } from '../Styled'
 
@@ -12,7 +11,8 @@ const data = [
     surname: 'Simple',
     name: 'Guy',
     secondName: 'Redundant',
-    position: 'Factory worker'
+    position: 'Factory worker',
+    profilePic: 'https://picsum.photos/500/400'
   },
   {
     id: '12839812939',
@@ -20,7 +20,8 @@ const data = [
     surname: 'Eloquent',
     name: 'Dude',
     secondName: 'Redundant',
-    position: 'Packager'
+    position: 'Packager',
+    profilePic: 'https://picsum.photos/1000/700'
   }
 ]
 
@@ -33,9 +34,10 @@ const EmployeeInfo = () => {
           const { secondName, ...rest } = item
           return <Card {...rest} />
         }}
-        keyExtractor={({ id }) => id} />
+        keyExtractor={({ id }) => id}
+        contentContainerStyle={{ flexGrow: 1 }} />
     </TopContainer>
   )
 }
 
-export default withKeyboardDismiss(EmployeeInfo)
+export default EmployeeInfo
