@@ -1,4 +1,5 @@
 import React from 'react'
+import { View } from 'react-native'
 
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
@@ -34,7 +35,9 @@ const signInInputs = [
 
 const SignIn = () => (
   <CenteredContainer>
-    <StyledText>Please, log in.</StyledText>
+    <View>
+      <StyledText>Please, log in.</StyledText>
+    </View>
     <Form
       action="Log In"
       inputs={signInInputs} />
