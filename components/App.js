@@ -1,4 +1,7 @@
 import React from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import authReducer from '../store/reducers/auth'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 
@@ -28,5 +31,10 @@ const App = createAppContainer(createStackNavigator(components, {
   },
   headerLayoutPreset: 'left'
 }))
+const store = createStore(authReducer)
 
-export default App
+export default () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
