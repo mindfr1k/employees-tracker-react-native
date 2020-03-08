@@ -6,12 +6,12 @@ const initState = {
 }
 
 export default (state = initState, { type }) => {
-    switch (type) {
-      case AUTH_START:
-        return state
-      case AUTH_SUCCESS:
-        return state
-      case AUTH_FAIL:
-        return state
-    }
+  switch (type) {
+    case AUTH_START:
+      return state
+    case AUTH_SUCCESS:
+      return state
+    case AUTH_FAIL:
+      return state
   }
+}

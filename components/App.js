@@ -25,7 +25,7 @@ const components = {
 }
 
 const App = createAppContainer(createStackNavigator(components, {
-  initialRouteName: 'EmployeeInfo',
+  initialRouteName: 'SignIn',
   defaultNavigationOptions: {
     gesturesEnabled: false
   },

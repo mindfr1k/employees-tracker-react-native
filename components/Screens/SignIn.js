@@ -12,14 +12,23 @@ const signInInputs = [
     autoFocus: true,
     first: true,
     returnKeyType: 'next',
-    blurOnSubmit: false
+    autoCorrect: false,
+    enablesReturnKeyAutomatically: true,
+    validation: {
+      required: true
+    }
   },
   {
     id: 'password',
     placeholder: 'Password',
     value: '',
     last: true,
-    returnKeyType: 'done'
+    returnKeyType: 'done',
+    autoCorrect: false,
+    enablesReturnKeyAutomatically: true,
+    validation: {
+      required: true
+    }
   }
 ]
 
