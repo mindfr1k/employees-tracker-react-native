@@ -1,4 +1,4 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAIL } from '../actions/action-types'
+import { AUTH_START, AUTH_SUCCESS, AUTH_FAIL } from '../actions/action-types'
 
 const initState = {
   token: null,
@@ -9,8 +9,8 @@ const initState = {
 
 export default (state = initState, { type }) => {
   switch (type) {
-    case AUTH_REQUEST:
-      return state
+    case AUTH_START:
+      return { ...state, loading: true }
     case AUTH_SUCCESS:
       return state
     case AUTH_FAIL:

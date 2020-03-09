@@ -1,1 +1,1 @@
-export { authRequest, authSuccess, authFail } from './auth'
+export { authRequest, authStart, authSuccess, authFail } from './auth'

@@ -8,7 +8,7 @@ import { StyledForm, StyledInput } from '../Styled'
 
 const placeholderColor = '#777'
 
-const Form = ({ inputs, action }) => {
+const Form = ({ inputs, action, onSubmit }) => {
   const [controls, setControls] = useState(inputs)
   const inputRefs = useRef({})
 
@@ -44,10 +44,12 @@ const Form = ({ inputs, action }) => {
           return true
         }
       })
-    invalidControl && Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
-      text: 'OK',
-      onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
-    }])
+    invalidControl
+      ? Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
+        text: 'OK',
+        onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
+      }])
+      : onSubmit()
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {

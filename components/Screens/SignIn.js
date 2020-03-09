@@ -2,10 +2,10 @@ import React from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
+import { authRequest } from '../../store/actions'
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer, StyledText } from '../Styled'
-import { authRequest } from '../../store/actions'
 
 const signInInputs = [
   {
@@ -35,14 +35,16 @@ const signInInputs = [
   }
 ]
 
-const SignIn = () => (
+const SignIn = ({ loading, authRequest }) => (
   <CenteredContainer>
+    <View>{loading && <StyledText>Rofl!</StyledText>}</View>
     <View>
       <StyledText>Please, log in.</StyledText>
     </View>
     <Form
       inputs={signInInputs}
-      action="Log In" />
+      action="Log In"
+      onSubmit={authRequest} />
   </CenteredContainer>
 )
 
