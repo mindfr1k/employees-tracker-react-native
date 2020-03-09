@@ -46,7 +46,7 @@ const SignIn = () => (
   </CenteredContainer>
 )
 
-const mapStateToProps = ({ loading, error }) => ({ loading, error })
+const mapStateToProps = ({ authReducer: { loading, error } }) => ({ loading, error })
 const mapDispatchToProps = { authRequest }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withKeyboardDismiss(SignIn))
