@@ -3,12 +3,12 @@ import { Alert } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import ImagePicker from 'react-native-image-picker'
 
-import { StyledForm, StyledInput } from '../Styled'
 import ActionButton from './ActionButton'
+import { StyledForm, StyledInput } from '../Styled'
 
 const placeholderColor = '#777'
 
-const Form = ({ inputs, action, navigation }) => {
+const Form = ({ inputs, action }) => {
   const [controls, setControls] = useState(inputs)
   const inputRefs = useRef({})
 
@@ -44,12 +44,10 @@ const Form = ({ inputs, action, navigation }) => {
           return true
         }
       })
-    invalidControl
-      ? Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
-        text: 'OK',
-        onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
-      }])
-      : navigation.navigate('EmployeeInfo')
+    invalidControl && Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
+      text: 'OK',
+      onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
+    }])
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {

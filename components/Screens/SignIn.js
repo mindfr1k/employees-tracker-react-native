@@ -1,9 +1,11 @@
 import React from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer, StyledText } from '../Styled'
+import { authRequest } from '../../store/actions'
 
 const signInInputs = [
   {
@@ -39,9 +41,12 @@ const SignIn = () => (
       <StyledText>Please, log in.</StyledText>
     </View>
     <Form
-      action="Log In"
-      inputs={signInInputs} />
+      inputs={signInInputs}
+      action="Log In" />
   </CenteredContainer>
 )
 
-export default withKeyboardDismiss(SignIn)
+const mapStateToProps = ({ loading, error }) => ({ loading, error })
+const mapDispatchToProps = { authRequest }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withKeyboardDismiss(SignIn))
