@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -47,12 +47,14 @@ const SignIn = ({ loading, error, authRequest }) => (
           <Form
             inputs={signInInputs}
             action="Log In"
-            onSubmit={authRequest} />
+            onSubmit={formData => authRequest(formData)} />
         </>)}
   </CenteredContainer>
 )
 
 const mapStateToProps = ({ authReducer: { loading, error } }) => ({ loading, error })
-const mapDispatchToProps = { authRequest }
+const mapDispatchToProps = dispatch => ({
+  authRequest: formData => dispatch(authRequest(formData))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withKeyboardDismiss(SignIn))

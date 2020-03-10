@@ -5,6 +5,7 @@ import ImagePicker from 'react-native-image-picker'
 
 import ActionButton from './ActionButton'
 import { StyledForm, StyledInput } from '../Styled'
+import { acc } from 'react-native-reanimated'
 
 const placeholderColor = '#777'
 
@@ -49,7 +50,7 @@ const Form = ({ inputs, action, onSubmit }) => {
         text: 'OK',
         onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
       }])
-      : onSubmit()
+      : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {
