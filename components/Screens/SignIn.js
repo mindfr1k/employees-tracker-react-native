@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 
 import { authRequest } from '../../store/actions'
@@ -35,16 +35,20 @@ const signInInputs = [
   }
 ]
 
-const SignIn = ({ loading, authRequest }) => (
+const SignIn = ({ loading, error, authRequest }) => (
   <CenteredContainer>
-    <View>{loading && <StyledText>Rofl!</StyledText>}</View>
-    <View>
-      <StyledText>Please, log in.</StyledText>
-    </View>
-    <Form
-      inputs={signInInputs}
-      action="Log In"
-      onSubmit={authRequest} />
+    {loading
+      ? <ActivityIndicator />
+      : (
+        <>
+          <View>
+            <StyledText>Please, log in.</StyledText>
+          </View>
+          <Form
+            inputs={signInInputs}
+            action="Log In"
+            onSubmit={authRequest} />
+        </>)}
   </CenteredContainer>
 )
 
