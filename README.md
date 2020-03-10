@@ -3,7 +3,7 @@
 > iOS application for monitoring employees' working schedule.
 
 ## Setup
-#### Backend can be downloaded and installed here: https://github.com/mindfr1k/employees-tracker-web-app
+#### Backend can be downloaded and installed from here: https://github.com/mindfr1k/employees-tracker-web-app
 
 #### In your command line tool:
 
