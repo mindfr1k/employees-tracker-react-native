@@ -17,8 +17,11 @@ $ cd employees-tracker-react-native
 # install dependencies
 $ npm i
 
+# change directory to ios
+$ cd ios
+
 #install cocoa pods dependencies
-$ cd ios/ && pod install && cd ../
+$ pod install && cd ../
 
 # enter development mode
 $ npm start
