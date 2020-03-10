@@ -7,14 +7,14 @@ const initState = {
   loading: false
 }
 
-export default (state = initState, { type }) => {
+export default (state = initState, { type, error, token, role }) => {
   switch (type) {
     case AUTH_START:
-      return { ...state, loading: true }
+      return { ...state, loading: true, error: null }
     case AUTH_SUCCESS:
-      return state
+      return { ...state, loading: false, token, role }
     case AUTH_FAIL:
-      return state
+      return { ...state, loading: false, error }
     default:
       return state
   }
