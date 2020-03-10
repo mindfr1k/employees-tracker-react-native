@@ -9,10 +9,10 @@
 
 ``` bash
 # clone the repository
-$ git clone repo-name
+$ git clone https://github.com/mindfr1k/employees-tracker-react-native.git
 
 # change directory to current repository location
-$ cd repo-name
+$ cd employees-tracker-react-native
 
 # install dependencies
 $ npm i
