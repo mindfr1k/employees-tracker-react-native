@@ -12,7 +12,7 @@ export default (state = initState, { type, error, token, role }) => {
     case AUTH_START:
       return { ...state, loading: true, error: null }
     case AUTH_SUCCESS:
-      return { ...state, loading: false, token, role }
+      return { ...state, token, role }
     case AUTH_FAIL:
       return { ...state, loading: false, error }
     default:

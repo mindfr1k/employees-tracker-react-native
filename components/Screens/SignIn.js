@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
-import { View, ActivityIndicator, Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ActivityIndicator, Alert } from 'react-native'
 import { connect } from 'react-redux'
 
 import { authRequest } from '../../store/actions'
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
-import { CenteredContainer, StyledText } from '../Styled'
+import { CenteredContainer } from '../Styled'
 
 const signInInputs = [
   {
@@ -37,25 +37,28 @@ const signInInputs = [
 ]
 
 const SignIn = ({ loading, error, authRequest, token, navigation }) => {
+  const [isErrorSubmitted, setIsErrorSubmitted] = useState(true)
   useEffect(() => {
     if (token)
       navigation.navigate('EmployeeInfo')
   }, [token])
   return (
     <CenteredContainer>
-      {error && Alert.alert(error, 'Please, try again.')}
+      {error && !isErrorSubmitted && Alert.alert(error, 'Please, try again.', [{
+        text: 'OK',
+        onPress: () => setIsErrorSubmitted(true)
+      }])}
       {loading
         ? <ActivityIndicator />
-        : (
-          <>
-            <View>
-              <StyledText>Please, log in.</StyledText>
-            </View>
-            <Form
-              inputs={signInInputs}
-              action="Log In"
-              onSubmit={formData => authRequest(formData)} />
-          </>)}
+        : (isErrorSubmitted && (
+          <Form
+            inputs={signInInputs}
+            action="Log In"
+            onSubmit={formData => { 
+              authRequest(formData)
+              setIsErrorSubmitted(false)
+            }} />
+        ))}
     </CenteredContainer>
   )
 }
