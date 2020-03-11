@@ -50,7 +50,7 @@ const SignIn = ({ loading, error, authRequest, token, navigation }) => {
       }])}
       {loading
         ? <ActivityIndicator />
-        : (isErrorSubmitted && (
+        : (isErrorSubmitted && !token && (
           <Form
             inputs={signInInputs}
             action="Log In"

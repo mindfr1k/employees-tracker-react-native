@@ -5,7 +5,6 @@ import ImagePicker from 'react-native-image-picker'
 
 import ActionButton from './ActionButton'
 import { StyledForm, StyledInput } from '../Styled'
-import { acc } from 'react-native-reanimated'
 
 const placeholderColor = '#777'
 

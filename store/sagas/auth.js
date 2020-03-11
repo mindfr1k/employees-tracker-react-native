@@ -1,10 +1,12 @@
 import { put } from 'redux-saga/effects'
+import AsyncStorage from '@react-native-community/async-storage'
+import jwtDecode from 'jwt-decode'
 
 import { authStart, authSuccess, authFail } from '../actions'
 
 const baseUrl = 'http://localhost:3502/api'
 
-export function* auth({ formData }) {
+export function* authRequest({ formData }) {
   yield put(authStart())
   const response = yield fetch(`${baseUrl}/signin`, {
     method: 'POST',
@@ -25,8 +27,16 @@ export function* auth({ formData }) {
   if (status === 200) {
     const res = yield response.json()
     const { token, role } = res
+    yield AsyncStorage.setItem('@employeesTracker:token', token)
+    yield AsyncStorage.setItem('@emplyeesTracker:role', role)
     return yield put(authSuccess(token, role))
   }
   const { message } = yield response.json()
   return yield put(authFail(message))
+}
+
+export function* isAuthVerified() {
+  const token = yield AsyncStorage.getItem('@employeesTracker:token')
+  const { exp } = jwtDecode(token)
+  return exp - Date.now() / 1000 ? true : false
 }
