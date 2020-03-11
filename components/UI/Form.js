@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 import { Alert } from 'react-native'
-import { withNavigation } from 'react-navigation'
 import ImagePicker from 'react-native-image-picker'
 
 import ActionButton from './ActionButton'
@@ -84,4 +83,4 @@ const Form = ({ inputs, action, onSubmit }) => {
   )
 }
 
-export default withNavigation(Form)
+export default Form

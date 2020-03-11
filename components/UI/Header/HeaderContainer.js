@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react'
 import { TouchableOpacity, Button, Animated, Keyboard } from 'react-native'
-import { withNavigation } from 'react-navigation'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
 import { StyledHeaderContainer } from '../../Styled'
 
-const flex = new Animated.Value(12)
+const flex = new Animated.Value(15)
 
 const HeaderContainer = ({ navigation }) => {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
@@ -21,7 +20,7 @@ const HeaderContainer = ({ navigation }) => {
   }
   const onBlur = () => {
     setIsSearchFocused(false)
-    animateFlex(12).start()
+    animateFlex(15).start()
     searchInput.current.clear()
   }
   const headerButton = isSearchFocused
@@ -50,4 +49,4 @@ const HeaderContainer = ({ navigation }) => {
   )
 }
 
-export default withNavigation(HeaderContainer)
+export default HeaderContainer

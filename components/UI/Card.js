@@ -1,6 +1,5 @@
 import React from 'react'
 import { Image, TouchableOpacity, Text, Alert } from 'react-native'
-import { withNavigation } from 'react-navigation'
 
 import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
 
@@ -46,4 +45,4 @@ const Card = ({ navigation, profilePic, surname, name, personnelName, position }
   )
 }
 
-export default withNavigation(Card)
+export default Card

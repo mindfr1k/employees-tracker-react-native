@@ -1,6 +1,5 @@
 import React from 'react'
 import Icon from 'react-native-ionicons'
-import { withNavigation } from 'react-navigation'
 
 import { StyledSearch, SearchInput } from '../Styled'
 
@@ -22,4 +21,4 @@ const SearchControl = ({ placeholderColor, onFocus, onBlur, reference }) => {
   )
 }
 
-export default withNavigation(SearchControl)
+export default SearchControl
