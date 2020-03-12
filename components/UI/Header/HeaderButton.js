@@ -5,7 +5,7 @@ import { StyledButton } from '../../Styled'
 
 const HeaderButton = ({ title, onPress }) => {
   return (
-    <TouchableOpacity
+    <TouchableOpacity style={{ }}
       onPress={onPress}>
       <StyledButton
         suppressHighlighting

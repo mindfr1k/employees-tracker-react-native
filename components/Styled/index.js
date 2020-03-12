@@ -15,11 +15,11 @@ export const TopContainer = styled.SafeAreaView`
 `
 
 export const StyledHeaderContainer = styled.View`
+  width: 98%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  width: 95%;
   background-color: #fff;
 `
 
