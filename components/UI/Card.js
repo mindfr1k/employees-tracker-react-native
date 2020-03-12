@@ -6,7 +6,7 @@ import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledBu
 
 const cardFontSize = 14
 
-const Card = ({ navigation, profilePic, surname, name, personnelName, position }) => {
+const Card = ({ profilePic, surname, name, personnelName, position }) => {
   const navigation = useNavigation()
   return (
     <CardContainer>

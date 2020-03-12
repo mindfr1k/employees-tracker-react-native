@@ -67,7 +67,7 @@ export const StyledSearch = styled.View`
   flex-direction: row;
   margin: 8px;
   padding: 5px;
-  background-color: #ededed;
+  background-color: #efefef;
   border-radius: 5px;
 `
 

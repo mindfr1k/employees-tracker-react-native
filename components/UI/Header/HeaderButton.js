@@ -1,12 +1,11 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 
 import { StyledButton } from '../../Styled'
 
 const HeaderButton = ({ title, onPress }) => {
   return (
-    <TouchableOpacity style={{ }}
+    <TouchableOpacity
       onPress={onPress}>
       <StyledButton
         suppressHighlighting

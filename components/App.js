@@ -14,7 +14,7 @@ const Stack = createStackNavigator()
 const App = () => (
   <SafeAreaProvider>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignIn" screenOptions={{ gestureEnabled: false }}>
+      <Stack.Navigator initialRouteName="SignIn" headerMode="screen" screenOptions={{ gestureEnabled: false }}>
         <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
         <Stack.Screen name="AddEmployee" component={AddEmployee} options={{ headerShown: false }} />
         <Stack.Screen name="UpdateEmployee" component={UpdateEmployee} options={{ headerShown: false }} />
