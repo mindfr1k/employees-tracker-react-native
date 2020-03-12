@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Button, Animated, Keyboard } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
@@ -7,7 +8,8 @@ import { StyledHeaderContainer } from '../../Styled'
 
 const flex = new Animated.Value(12)
 
-const HeaderContainer = ({ navigation }) => {
+const HeaderContainer = () => {
+  const navigation = useNavigation()
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const searchInput = useRef()
   const animateFlex = toValue => Animated.timing(flex, {

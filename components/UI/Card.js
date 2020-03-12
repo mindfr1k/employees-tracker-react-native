@@ -1,11 +1,13 @@
 import React from 'react'
 import { Image, TouchableOpacity, Text, Alert } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
 
 const cardFontSize = 14
 
 const Card = ({ navigation, profilePic, surname, name, personnelName, position }) => {
+  const navigation = useNavigation()
   return (
     <CardContainer>
       <CardImage
