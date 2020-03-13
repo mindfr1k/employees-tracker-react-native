@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ActivityIndicator, Alert } from 'react-native'
 import { connect } from 'react-redux'
 
-import { authRequest } from '../../store/actions'
+import { authSignIn } from '../../store/actions'
 import Form from '../UI/Form'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
@@ -36,7 +36,7 @@ const signInInputs = [
   }
 ]
 
-const SignIn = ({ loading, error, authRequest, token, navigation }) => {
+const SignIn = ({ loading, error, authSignIn, token, navigation }) => {
   const [isErrorSubmitted, setIsErrorSubmitted] = useState(true)
   useEffect(() => {
     if (token)
@@ -55,7 +55,7 @@ const SignIn = ({ loading, error, authRequest, token, navigation }) => {
             inputs={signInInputs}
             action="Log In"
             onSubmit={formData => { 
-              authRequest(formData)
+              authSignIn(formData)
               setIsErrorSubmitted(false)
             }} />
         ))}
@@ -63,9 +63,9 @@ const SignIn = ({ loading, error, authRequest, token, navigation }) => {
   )
 }
 
-const mapStateToProps = ({ authReducer: { loading, error, token } }) => ({ loading, error, token })
+const mapStateToProps = ({ requestReducer: { loading, error, token } }) => ({ loading, error, token })
 const mapDispatchToProps = dispatch => ({
-  authRequest: formData => dispatch(authRequest(formData))
+  authSignIn: formData => dispatch(authSignIn(formData))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withKeyboardDismiss(SignIn))

@@ -4,13 +4,13 @@ import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 
-import authReducer from './store/reducers/auth'
+import requestReducer from './store/reducers/request'
 import { watchAuth } from './store/sagas'
 import App from './components/App'
 import { name } from './app.json'
 
 const sagaMiddleware = createSagaMiddleware()
-const store = createStore(combineReducers({ authReducer }), applyMiddleware(sagaMiddleware))
+const store = createStore(combineReducers({ requestReducer }), applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(watchAuth)
 const AppContainer = () => (
   <Provider store={store}>
