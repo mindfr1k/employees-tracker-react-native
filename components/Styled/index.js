@@ -5,6 +5,7 @@ export const CenteredContainer = styled.SafeAreaView`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: #fff;
 `
 
 export const TopContainer = styled.SafeAreaView`
@@ -15,10 +16,12 @@ export const TopContainer = styled.SafeAreaView`
 `
 
 export const StyledHeaderContainer = styled.View`
+  width: 98%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  width: 98%;
+  background-color: #fff;
 `
 
 export const StyledForm = styled.View`
@@ -65,7 +68,7 @@ export const StyledSearch = styled.View`
   flex-direction: row;
   margin: 8px;
   padding: 5px;
-  background-color: #ededed;
+  background-color: #efefef;
   border-radius: 5px;
 `
 

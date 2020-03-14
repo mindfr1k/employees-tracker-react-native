@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { TouchableOpacity, Button, Animated, Keyboard } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import { Button, Animated, Keyboard } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
@@ -8,16 +8,16 @@ import { StyledHeaderContainer } from '../../Styled'
 
 const flex = new Animated.Value(12)
 
-const HeaderContainer = ({ navigation }) => {
+const HeaderContainer = () => {
+  const navigation = useNavigation()
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const searchInput = useRef()
   const animateFlex = toValue => Animated.timing(flex, {
     toValue,
-    duration: 300
+    duration: 200
   })
   const onFocus = () => {
-    setIsSearchFocused(true)
-    animateFlex(5).start()
+    animateFlex(5).start(() => setIsSearchFocused(true))
   }
   const onBlur = () => {
     setIsSearchFocused(false)
@@ -43,11 +43,11 @@ const HeaderContainer = ({ navigation }) => {
           onBlur={onBlur}
           reference={searchInput} />
       </Animated.View>
-      <TouchableOpacity style={{ flex: 1 }}>
+      <Animated.View style={{ flex: 1 }}>
         {headerButton}
-      </TouchableOpacity>
+      </Animated.View>
     </StyledHeaderContainer>
   )
 }
 
-export default withNavigation(HeaderContainer)
+export default HeaderContainer

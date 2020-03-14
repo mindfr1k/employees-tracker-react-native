@@ -34,8 +34,7 @@ const EmployeeInfo = () => {
           const { secondName, ...rest } = item
           return <Card {...rest} />
         }}
-        keyExtractor={({ id }) => id}
-        contentContainerStyle={{ flexGrow: 1 }} />
+        keyExtractor={({ id }) => id} />
     </TopContainer>
   )
 }

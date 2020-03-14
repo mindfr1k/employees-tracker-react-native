@@ -1,14 +1,13 @@
 import React, { useState, useRef } from 'react'
 import { Alert } from 'react-native'
-import { withNavigation } from 'react-navigation'
 import ImagePicker from 'react-native-image-picker'
 
-import { StyledForm, StyledInput } from '../Styled'
 import ActionButton from './ActionButton'
+import { StyledForm, StyledInput } from '../Styled'
 
 const placeholderColor = '#777'
 
-const Form = ({ inputs, action, navigation }) => {
+const Form = ({ inputs, action, onSubmit }) => {
   const [controls, setControls] = useState(inputs)
   const inputRefs = useRef({})
 
@@ -49,7 +48,7 @@ const Form = ({ inputs, action, navigation }) => {
         text: 'OK',
         onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
       }])
-      : navigation.navigate('EmployeeInfo')
+      : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
   }
 
   const formInputs = controls.map(({ id, ...config }, i) => {
@@ -84,4 +83,4 @@ const Form = ({ inputs, action, navigation }) => {
   )
 }
 
-export default withNavigation(Form)
+export default Form

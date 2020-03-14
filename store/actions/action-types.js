@@ -1,0 +1,7 @@
+export const REQUEST_START = 'AUTH_START'
+export const REQUEST_SUCCESS = 'AUTH_SUCCESS'
+export const REQUEST_FAIL = 'AUTH_FAIL'
+export const AUTH_SIGNIN = 'AUTH_REQUEST'
+export const AUTH_VERIFY = 'AUTH_VERIFY'
+export const VERIFY_START = 'VERIFY_START'
+export const VERIFY_END = 'VERIFY_END'
