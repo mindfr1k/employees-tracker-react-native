@@ -36,7 +36,7 @@ const signInInputs = [
   }
 ]
 
-const SignIn = ({ loading, error, authSignIn, token, navigation }) => {
+const SignIn = ({ loading, error, token, authSignIn, navigation }) => {
   const [isErrorSubmitted, setIsErrorSubmitted] = useState(true)
   useEffect(() => {
     if (token)

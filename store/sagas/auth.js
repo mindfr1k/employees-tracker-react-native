@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects'
+import { put, call } from 'redux-saga/effects'
 import AsyncStorage from '@react-native-community/async-storage'
 import jwtDecode from 'jwt-decode'
 
@@ -28,15 +28,29 @@ export function* authSignIn({ formData }) {
     const res = yield response.json()
     const { token, role } = res
     yield AsyncStorage.setItem('@employeesTracker:token', token)
-    yield AsyncStorage.setItem('@emplyeesTracker:role', role)
-    return yield put(requestSuccess(token, role))
+    yield AsyncStorage.setItem('@employeesTracker:role', role)
+    return yield put(requestSuccess({ token, role }))
   }
   const { message } = yield response.json()
   return yield put(requestFail(message))
 }
 
 export function* authVerify() {
+  yield put(requestStart())
   const token = yield AsyncStorage.getItem('@employeesTracker:token')
+  if (!token)
+    return yield put(requestSuccess({ token: null }))
   const { exp } = jwtDecode(token)
-  return exp - Date.now() / 1000 ? true : false
+  if (exp - Date.now() / 1000 > 0) {
+    const role = yield AsyncStorage.getItem('@employeesTracker:role')
+    return yield put(requestSuccess({ token, role }))
+  }
+  return yield call(logout)
+}
+
+function* logout() {
+  yield put(requestStart())
+  yield AsyncStorage.removeItem('@employeesTracker:token')
+  yield AsyncStorage.removeItem('@employeesTracker:role')
+  return yield put(requestSuccess({ token: null, role: null }))
 }
