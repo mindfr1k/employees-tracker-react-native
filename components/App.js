@@ -16,7 +16,6 @@ const Stack = createStackNavigator()
 
 const App = ({ loading, token, authVerify }) => {
   useEffect(() => {
-    console.log('works only once!')
     authVerify()
   }, [])
   if (loading)
