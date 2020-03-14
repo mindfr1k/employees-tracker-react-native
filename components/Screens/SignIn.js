@@ -36,12 +36,8 @@ const signInInputs = [
   }
 ]
 
-const SignIn = ({ loading, error, token, authSignIn, navigation }) => {
+const SignIn = ({ loading, error, token, authSignIn }) => {
   const [isErrorSubmitted, setIsErrorSubmitted] = useState(true)
-  useEffect(() => {
-    // if (token)
-    //   navigation.navigate('EmployeeInfo')
-  }, [token])
   return (
     <CenteredContainer>
       {error && !isErrorSubmitted && Alert.alert(error, 'Please, try again.', [{
