@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, TouchableOpacity, Text, Alert } from 'react-native'
+import { TouchableOpacity, Text, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
@@ -13,10 +13,8 @@ const Card = ({ profilePic, surname, name, personnelName, position }) => {
       <CardImage
         source={{ uri: profilePic }} />
       <CardHeader>{`${surname} ${name}`}</CardHeader>
-      <CardText>Personnel number:
-        <Text style={{ fontWeight: 'bold' }}>
-          {` ${personnelName}`}
-        </Text>
+      <CardText>
+        Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
         {`\n${position}`}
       </CardText>
       <CardSeparator />
