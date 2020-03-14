@@ -14,11 +14,11 @@ import HeaderContainer from './UI/Header/HeaderContainer'
 
 const Stack = createStackNavigator()
 
-const App = ({ loading, token, authVerify }) => {
+const App = ({ initLoading, token, authVerify }) => {
   useEffect(() => {
     authVerify()
   }, [])
-  if (loading)
+  if (initLoading)
     return <InitLoading />
   const routes = token
     ? (
@@ -38,7 +38,7 @@ const App = ({ loading, token, authVerify }) => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={token ? 'EmployeeInfo' : 'SignIn'} headerMode="screen"
+        <Stack.Navigator initialRouteName="EmployeeInfo" headerMode="screen"
           screenOptions={{ gestureEnabled: false }}>
           {routes}
         </Stack.Navigator>
@@ -47,7 +47,10 @@ const App = ({ loading, token, authVerify }) => {
   )
 }
 
-const mapStateToProps = ({ requestReducer: { loading, token } }) => ({ loading, token })
+const mapStateToProps = ({ verifyReducer: { initLoading }, requestReducer: { token } }) => ({
+  initLoading,
+  token
+})
 const mapDispatchToProps = dispatch => ({
   authVerify: () => dispatch(authVerify())
 })
