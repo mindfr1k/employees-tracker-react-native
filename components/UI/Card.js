@@ -1,5 +1,5 @@
-import React from 'react'
-import { TouchableOpacity, Text, Alert } from 'react-native'
+import React, { useState } from 'react'
+import { TouchableOpacity, Text, Alert, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
 
@@ -9,10 +9,13 @@ const cardFontSize = 16
 
 const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
   const navigation = useNavigation()
+  const [isImageLoading, setIsImageLoading] = useState(true)
   return (
     <CardContainer>
       <CardImage
-        source={{ uri: profilePic }} />
+        source={{ uri: profilePic }}
+        onLoadEnd={() => setIsImageLoading(false)} />
+      {isImageLoading && <ActivityIndicator />}
       <CardHeader>{`${surname} ${name}`}</CardHeader>
       <CardText>
         Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
