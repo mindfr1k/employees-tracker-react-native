@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, Text, Alert, ActivityIndicator } from 'react-native'
+import { TouchableOpacity, Text, Alert, ActivityIndicator, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
 
 import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
 
 const cardFontSize = 16
+const opacity = new Animated.Value(1)
 
 const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
   const navigation = useNavigation()
@@ -14,7 +15,8 @@ const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
     <CardContainer>
       <CardImage
         source={{ uri: profilePic }}
-        onLoadEnd={() => setIsImageLoading(false)} />
+        onLoad={() => Animated.timing(opacity, { toValue: 0, duration: 1000 }).start()}
+      />
       {isImageLoading && <ActivityIndicator />}
       <CardHeader>{`${surname} ${name}`}</CardHeader>
       <CardText>

@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { Animated } from 'react-native'
 
 export const CenteredContainer = styled.SafeAreaView`
   height: 100%;
@@ -89,7 +90,7 @@ export const CardContainer = styled.View`
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14);
 `
 
-export const CardImage = styled.Image`
+export const CardImage = styled(Animated.Image)`
   margin: 0 0 5px 0;
   width: 100%;
   height: 200px;
