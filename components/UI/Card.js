@@ -1,18 +1,24 @@
 import React from 'react'
-import { TouchableOpacity, Text, Alert } from 'react-native'
+import { TouchableOpacity, Text, Alert, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
 
 import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
 
 const cardFontSize = 16
+const opacity = new Animated.Value(0)
 
 const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
   const navigation = useNavigation()
   return (
     <CardContainer>
       <CardImage
-        source={{ uri: profilePic }} />
+        style={{ opacity }}
+        source={{ uri: profilePic }}
+        onLoad={() => {
+          Animated.timing(opacity, { toValue: 1, duration: 500 }).start()
+        }}
+      />
       <CardHeader>{`${surname} ${name}`}</CardHeader>
       <CardText>
         Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
