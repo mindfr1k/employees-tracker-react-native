@@ -27,10 +27,10 @@ const App = ({ initLoading, token, authVerify }) => {
         <Stack.Screen name="UpdateEmployee" component={UpdateEmployee} options={{ headerShown: false }} />
         <Stack.Screen name="EmployeeInfo" component={EmployeeInfo} options={{
           header: () => (
-            <SafeAreaView style={{ backgroundColor: '#fff' }}>
+            <SafeAreaView style={{ backgroundColor: '#fff', paddingBottom: 0 }}>
               <HeaderContainer />
             </SafeAreaView>
-          )
+          ),
         }} />
       </>
     )

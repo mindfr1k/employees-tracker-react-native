@@ -17,12 +17,13 @@ export const TopContainer = styled.SafeAreaView`
 `
 
 export const StyledHeaderContainer = styled.View`
-  width: 98%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  align-self: flex-end;
 `
 
 export const StyledForm = styled.View`
