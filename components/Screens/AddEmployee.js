@@ -6,17 +6,6 @@ import { CenteredContainer } from '../Styled'
 
 const addEmployeeInputs = [
   {
-    id: 'profilePic',
-    placeholder: 'Upload photo',
-    value: '',
-    returnKeyType: 'next',
-    first: true,
-    isMediaInput: true,
-    validation: { 
-      required: true
-    }
-  },
-  {
     id: 'surname',
     placeholder: 'Surname',
     value: '',
@@ -25,6 +14,17 @@ const addEmployeeInputs = [
     enablesReturnKeyAutomatically: true,
     returnKeyType: 'next',
     validation: {
+      required: true
+    }
+  },
+  {
+    id: 'profilePic',
+    placeholder: 'Upload photo',
+    value: '',
+    returnKeyType: 'next',
+    first: true,
+    isMediaInput: true,
+    validation: { 
       required: true
     }
   },

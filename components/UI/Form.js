@@ -54,7 +54,7 @@ const Form = ({ inputs, action, onSubmit }) => {
   const formInputs = controls.map(({ id, ...config }, i) => {
     config['placeholderTextColor'] = placeholderColor
     if (config.isMediaInput)
-      config['onTouchStart'] = () => uploadImage(id)
+      config['onFocus'] = () => uploadImage(id)
     const inputProps = {
       key: id,
       ref: input => inputRefs.current[`field${i + 1}`] = input,
