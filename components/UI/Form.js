@@ -55,25 +55,15 @@ const Form = ({ inputs, action, onSubmit }) => {
     config['placeholderTextColor'] = placeholderColor
     if (config.isMediaInput)
       config['onTouchStart'] = () => uploadImage(id)
-    if (i === 0)
-      return <StyledInput
-        key={id}
-        {...config}
-        onSubmitEditing={() => focusField(`field${i + 2}`)}
-        ref={input => inputRefs.current[`field${i + 1}`] = input}
-        onChangeText={text => inputChangedHandler(text, id)} />
+    const inputProps = {
+      key: id,
+      ref: input => inputRefs.current[`field${i + 1}`] = input,
+      onChangeText: text => inputChangedHandler(text, id),
+      ...config
+    }
     if (i === controls.length - 1)
-      return <StyledInput
-        key={id}
-        {...config}
-        ref={input => inputRefs.current[`field${i + 1}`] = input}
-        onChangeText={text => inputChangedHandler(text, id)} />
-    return <StyledInput
-      key={id}
-      {...config}
-      onSubmitEditing={() => focusField(`field${i + 2}`)}
-      ref={input => inputRefs.current[`field${i + 1}`] = input}
-      onChangeText={text => inputChangedHandler(text, id)} />
+      return <StyledInput {...inputProps} />
+    return <StyledInput {...inputProps} onSubmitEditing={() => focusField(`field${i + 2}`)} />
   })
   return (
     <StyledForm>
