@@ -6,7 +6,7 @@ import { CenteredContainer } from '../Styled'
 
 const addEmployeeInputs = [
   {
-    id: 'photo',
+    id: 'profilePic',
     placeholder: 'Upload photo',
     value: '',
     returnKeyType: 'next',
@@ -21,9 +21,9 @@ const addEmployeeInputs = [
     placeholder: 'Surname',
     value: '',
     autoFocus: true,
-    returnKeyType: 'next',
     autoCorrect: false,
     enablesReturnKeyAutomatically: true,
+    returnKeyType: 'next',
     validation: {
       required: true
     }
@@ -32,9 +32,9 @@ const addEmployeeInputs = [
     id: 'name',
     placeholder: 'Name',
     value: '',
-    returnKeyType: 'next',
     autoCorrect: false,
     enablesReturnKeyAutomatically: true,
+    returnKeyType: 'next',
     validation: {
       required: true
     }
@@ -43,9 +43,9 @@ const addEmployeeInputs = [
     id: 'secondName',
     placeholder: 'Second Name',
     value: '',
-    returnKeyType: 'next',
     autoCorrect: false,
     enablesReturnKeyAutomatically: true,
+    returnKeyType: 'next',
     validation: {
       required: true
     }
@@ -54,9 +54,9 @@ const addEmployeeInputs = [
     id: 'position',
     placeholder: 'Position',
     value: '',
-    returnKeyType: 'next',
     autoCorrect: false,
     enablesReturnKeyAutomatically: true,
+    returnKeyType: 'next',
     validation: {
       required: true
     }
@@ -66,9 +66,9 @@ const addEmployeeInputs = [
     placeholder: 'Personnel Number',
     value: '',
     last: true,
-    returnKeyType: 'done',
     autoCorrect: false,
     enablesReturnKeyAutomatically: true,
+    returnKeyType: 'done',
     validation: {
       required: true
     }
