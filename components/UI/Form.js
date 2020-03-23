@@ -7,11 +7,11 @@ import { StyledForm, StyledInput } from '../Styled'
 
 const placeholderColor = '#777'
 
-const Form = ({ inputs, action, onSubmit }) => {
+const Form = ({ inputs, action, onSubmit, children }) => {
   const [controls, setControls] = useState(inputs)
   const inputRefs = useRef({})
 
-  const focusField = key => inputRefs.current[key].focus()
+  const focusField = child => child.focus()
 
   const inputChangedHandler = (text, id) => {
     setControls(controls.map(control => control.id === id ? { ...control, value: text } : control))
@@ -63,7 +63,7 @@ const Form = ({ inputs, action, onSubmit }) => {
     }
     if (i === controls.length - 1)
       return <StyledInput {...inputProps} />
-    return <StyledInput {...inputProps} onSubmitEditing={() => focusField(`field${i + 2}`)} />
+    return <StyledInput {...inputProps} onSubmitEditing={() => focusField(children[0])} />
   })
   return (
     <StyledForm>
