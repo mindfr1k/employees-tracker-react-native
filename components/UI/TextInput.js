@@ -12,6 +12,7 @@ const TextInput = ({ id, placeholder, validation, ...config }) => {
       onChangeText={text => setValue(text)}
       placeholderTextColor={placeholderColor}
       autoCorrect={false}
+      returnKeyType="next"
       enablesReturnKeyAutomatically
       validation={validation}
       {...config} />

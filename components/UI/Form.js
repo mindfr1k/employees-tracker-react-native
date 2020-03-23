@@ -40,9 +40,17 @@ const Form = ({ action, onSubmit, children }) => {
       : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
   }
 
+  const formInputs = React.Children.map(children, (child, i) => {
+    if (i === 0)
+      return React.cloneElement(child, { autoFocus: true, first: true })
+    if (i === React.Children.count(children) - 1)
+      return React.cloneElement(child, { returnKeyType: 'done', last: true})
+    return child
+  })
+
   return (
     <StyledForm>
-      {children}
+      {formInputs}
       <ActionButton title={action} onPress={submitHandler} />
     </StyledForm>
   )
