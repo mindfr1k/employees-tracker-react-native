@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { authSignIn } from '../../store/actions'
 import Form from '../UI/Form'
+import TextInput from '../UI/TextInput'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
 
@@ -48,13 +49,28 @@ const SignIn = ({ loading, error, token, authSignIn }) => {
         ? <ActivityIndicator />
         : (isErrorSubmitted && !token && (
           <Form
-            inputs={signInInputs}
             action="Log In"
-            onSubmit={formData => { 
+            onSubmit={formData => {
               authSignIn(formData)
               setIsErrorSubmitted(false)
-            }} />
+            }}>
+            <TextInput
+              id="username"
+              placeholder="Username"
+              validation={{ required: true }}
+              first
+              returnKeyType="next"
+              autoFocus
+              autoCapitalize="none" />
+            <TextInput
+              id="password"
+              placeholder="Password"
+              validation={{ required: true }}
+              last
+              returnKeyType="done" />
+          </Form>
         ))}
+
     </CenteredContainer>
   )
 }

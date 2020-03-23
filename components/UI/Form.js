@@ -1,22 +1,11 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import { Alert } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 
 import ActionButton from './ActionButton'
-import { StyledForm, StyledInput } from '../Styled'
+import { StyledForm } from '../Styled'
 
-const placeholderColor = '#777'
-
-const Form = ({ inputs, action, onSubmit }) => {
-  const [controls, setControls] = useState(inputs)
-  const inputRefs = useRef({})
-
-  const focusField = key => inputRefs.current[key].focus()
-
-  const inputChangedHandler = (text, id) => {
-    setControls(controls.map(control => control.id === id ? { ...control, value: text } : control))
-  }
-
+const Form = ({ action, onSubmit, children }) => {
   const uploadImage = id => {
     setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
     ImagePicker.showImagePicker({
@@ -51,23 +40,9 @@ const Form = ({ inputs, action, onSubmit }) => {
       : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
   }
 
-  const formInputs = controls.map(({ id, ...config }, i) => {
-    config['placeholderTextColor'] = placeholderColor
-    if (config.isMediaInput)
-      config['onFocus'] = () => uploadImage(id)
-    const inputProps = {
-      key: id,
-      ref: input => inputRefs.current[`field${i + 1}`] = input,
-      onChangeText: text => inputChangedHandler(text, id),
-      ...config
-    }
-    if (i === controls.length - 1)
-      return <StyledInput {...inputProps} />
-    return <StyledInput {...inputProps} onSubmitEditing={() => focusField(`field${i + 2}`)} />
-  })
   return (
     <StyledForm>
-      {formInputs}
+      {children}
       <ActionButton title={action} onPress={submitHandler} />
     </StyledForm>
   )
