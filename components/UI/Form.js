@@ -42,26 +42,27 @@ const Form = ({ action, onSubmit, children }) => {
       : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
   }
 
-  const formInputs = React.Children
-    .map(children, (child, i) => {
-      if (i === 0)
-        return React.cloneElement(child, { autoFocus: true, first: true })
-      if (i === React.Children.count(children) - 1)
-        return React.cloneElement(child, { returnKeyType: 'done', last: true })
-      return child
-    })
-    .map((child, i, children) => {
-      if (i === React.Children.count(children) - 1)
-        return React.cloneElement(child, { ref: input => inputRefs.current.push(input) })
-      return React.cloneElement(child, {
-        ref: input => inputRefs.current.push(input),
-        onSubmitEditing: () => inputRefs.current[i + 1].focus()
-      })
-    })
+  //   .map((child, i, children) => {
+  //     if (i === React.Children.count(children) - 1)
+  //       return React.cloneElement(child, { ref: input => inputRefs.current.push(input) })
+  //     return React.cloneElement(child, {
+  //       ref: input => inputRefs.current.push(input),
+  //       onSubmitEditing: () => inputRefs.current[i + 1].focus()
+  //     })
+  //   })
+
+  const firstInput = React.cloneElement(children[0], { autoFocus: true, first: true })
+  const lastInput = React.cloneElement(children[children.length - 1], {
+    returnKeyType: 'done',
+    last: true
+  })
+  const formInputs = children.slice(1, -1)
 
   return (
     <StyledForm>
+      {firstInput}
       {formInputs}
+      {lastInput}
       <ActionButton title={action} onPress={submitHandler} />
     </StyledForm>
   )
