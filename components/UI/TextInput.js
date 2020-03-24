@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useImperativeHandle, forwardRef } from 'react'
 
 import { StyledInput, placeholderColor } from '../Styled'
 
-const TextInput = ({ id, placeholder, validation, ...config }) => {
-  const [value, setValue ] = useState('')
+const TextInput = ({ id, placeholder, validation, ...config }, ref) => {
+  const [value, setValue] = useState('')
+  const inputRef = useRef(null)
+  useImperativeHandle(ref, () => inputRef.current)
   return (
     <StyledInput
+      ref={inputRef}
       id={id}
       placeholder={placeholder}
       value={value}
@@ -19,4 +22,4 @@ const TextInput = ({ id, placeholder, validation, ...config }) => {
   )
 }
 
-export default TextInput
+export default forwardRef(TextInput)

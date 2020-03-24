@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Alert } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 
@@ -6,6 +6,8 @@ import ActionButton from './ActionButton'
 import { StyledForm } from '../Styled'
 
 const Form = ({ action, onSubmit, children }) => {
+  const inputRefs = useRef([])
+
   const uploadImage = id => {
     setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
     ImagePicker.showImagePicker({
@@ -40,13 +42,22 @@ const Form = ({ action, onSubmit, children }) => {
       : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
   }
 
-  const formInputs = React.Children.map(children, (child, i) => {
-    if (i === 0)
-      return React.cloneElement(child, { autoFocus: true, first: true })
-    if (i === React.Children.count(children) - 1)
-      return React.cloneElement(child, { returnKeyType: 'done', last: true})
-    return child
-  })
+  const formInputs = React.Children
+    .map(children, (child, i) => {
+      if (i === 0)
+        return React.cloneElement(child, { autoFocus: true, first: true })
+      if (i === React.Children.count(children) - 1)
+        return React.cloneElement(child, { returnKeyType: 'done', last: true })
+      return child
+    })
+    .map((child, i, children) => {
+      if (i === React.Children.count(children) - 1)
+        return React.cloneElement(child, { ref: input => inputRefs.current.push(input) })
+      return React.cloneElement(child, {
+        ref: input => inputRefs.current.push(input),
+        onSubmitEditing: () => inputRefs.current[i + 1].focus()
+      })
+    })
 
   return (
     <StyledForm>
