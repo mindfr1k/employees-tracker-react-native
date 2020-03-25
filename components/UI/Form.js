@@ -6,11 +6,35 @@ import ActionButton from './ActionButton'
 import { StyledForm } from '../Styled'
 
 const Form = ({ action, onSubmit, children }) => {
-  const [inputState, setInputState] = useState(React.Children.map(children, ({ props: { id } }) => ({
-    id,
-    value: ''
-  })))
+  const [formData, setFormData] = useState(React.Children.toArray(children)
+    .reduce((acc, { props: { id } }) => ({
+      ...acc,
+      [id]: ''
+    }), {}))
   const inputRefs = useRef([])
+
+  const submitHandler = () => {
+    const inputs = [firstInput, ...formInputs, lastInput]
+    const invalidControl = inputs.filter(({ props: { validation } }) => validation)
+      .find(({ props: { validation, id, placeholder } }, i) => {
+        const { required } = validation
+        if (required && formData[id].trim() === '') {
+          validation.errorMessage = `${placeholder} is required!`
+          validation.errorRef = inputRefs.current[i]
+          return true
+        }
+      })
+    if (invalidControl)
+      return Alert.alert(invalidControl.props.validation.errorMessage, `Please, fix this error.`, [{
+        text: 'OK',
+        onPress: () => invalidControl.props.validation.errorRef.focus()
+      }])
+    onSubmit(formData)
+  }
+
+  const onTextChanged = (text, id) => {
+    setFormData({ ...formData, [id]: text })
+  }
 
   const uploadImage = id => {
     setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
@@ -27,32 +51,8 @@ const Form = ({ action, onSubmit, children }) => {
     })
   }
 
-  const submitHandler = () => {
-    const inputs = [firstInput, ...formInputs, lastInput]
-    const invalidControl = inputs.filter(({ validation }) => validation)
-      .find(({ props: { placeholder, value, validation } }, i) => {
-        const { required } = validation
-        if (required && value.trim() === '') {
-          validation.errorMessage = `${placeholder} is required!`
-          validation.errorRef = inputRefs.current[i]
-          return true
-        }
-      })
-    if (invalidControl)
-      return Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
-        text: 'OK',
-        onPress: () => invalidControl.validation.errorRef.focus()
-      }])
-    onSubmit(inputs.reduce((acc, { props: { id, value } }) => ({ ...acc, [id]: value }), {}))
-  }
-
-  const changeTextHandler = (text, id) => {
-    setInputState(inputState.map(control => control.id === id ? { ...control, value: text } : control))
-  }
-
   const inputs = React.Children.map(children, (child, i) => React.cloneElement(child, {
-    value: inputState[i].value,
-    onChangeText: changeTextHandler,
+    onTextChanged,
     ref: input => inputRefs.current.push(input),
     onSubmitEditing: i === React.Children.count(children) - 1
       ? undefined
