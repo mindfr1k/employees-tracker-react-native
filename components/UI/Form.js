@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 import { Alert } from 'react-native'
-import ImagePicker from 'react-native-image-picker'
 
 import ActionButton from './ActionButton'
 import { StyledForm } from '../Styled'
@@ -36,23 +35,9 @@ const Form = ({ action, onSubmit, children }) => {
     setFormData({ ...formData, [id]: text })
   }
 
-  const uploadImage = id => {
-    setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
-    ImagePicker.showImagePicker({
-      title: 'Select employee photo'
-    }, ({ didCancel, error, fileName }) => {
-      if (error)
-        console.log(error)
-      didCancel
-        ? setControls(controls.map(control => control.id === id ? { ...control, value: '' } : control))
-        : setControls(controls.map(control => {
-          return control.id === id ? { ...control, value: fileName } : control
-        }))
-    })
-  }
-
   const inputs = React.Children.map(children, (child, i) => React.cloneElement(child, {
     onTextChanged,
+    onImageUploaded: onTextChanged,
     ref: input => inputRefs.current.push(input),
     onSubmitEditing: i === React.Children.count(children) - 1
       ? undefined
