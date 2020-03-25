@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Alert } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 
@@ -6,6 +6,10 @@ import ActionButton from './ActionButton'
 import { StyledForm } from '../Styled'
 
 const Form = ({ action, onSubmit, children }) => {
+  const [inputState, setInputState] = useState(React.Children.map(children, ({ props: { id } }) => ({
+    id,
+    value: ''
+  })))
   const inputRefs = useRef([])
 
   const uploadImage = id => {
@@ -24,25 +28,31 @@ const Form = ({ action, onSubmit, children }) => {
   }
 
   const submitHandler = () => {
-    const invalidControl = controls
-      .filter(({ validation }) => validation)
-      .find(({ placeholder, value, validation }, i) => {
+    const inputs = [firstInput, ...formInputs, lastInput]
+    const invalidControl = inputs.filter(({ validation }) => validation)
+      .find(({ props: { placeholder, value, validation } }, i) => {
         const { required } = validation
         if (required && value.trim() === '') {
-          validation['errorMessage'] = `${placeholder} is required!`
-          validation['errorRef'] = `field${i + 1}`
+          validation.errorMessage = `${placeholder} is required!`
+          validation.errorRef = inputRefs.current[i]
           return true
         }
       })
-    invalidControl
-      ? Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
+    if (invalidControl)
+      return Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
         text: 'OK',
-        onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
+        onPress: () => invalidControl.validation.errorRef.focus()
       }])
-      : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
+    onSubmit(inputs.reduce((acc, { props: { id, value } }) => ({ ...acc, [id]: value }), {}))
+  }
+
+  const changeTextHandler = (text, id) => {
+    setInputState(inputState.map(control => control.id === id ? { ...control, value: text } : control))
   }
 
   const inputs = React.Children.map(children, (child, i) => React.cloneElement(child, {
+    value: inputState[i].value,
+    onChangeText: changeTextHandler,
     ref: input => inputRefs.current.push(input),
     onSubmitEditing: i === React.Children.count(children) - 1
       ? undefined

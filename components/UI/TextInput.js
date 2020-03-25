@@ -1,9 +1,8 @@
-import React, { useState, useRef, useImperativeHandle, forwardRef } from 'react'
+import React, { useRef, useImperativeHandle, forwardRef } from 'react'
 
 import { StyledInput, placeholderColor } from '../Styled'
 
-const TextInput = ({ id, placeholder, validation, ...config }, ref) => {
-  const [value, setValue] = useState('')
+const TextInput = ({ id, placeholder, validation, value, onChangeText, ...config }, ref) => {
   const inputRef = useRef(null)
   useImperativeHandle(ref, () => inputRef.current)
   return (
@@ -12,7 +11,7 @@ const TextInput = ({ id, placeholder, validation, ...config }, ref) => {
       id={id}
       placeholder={placeholder}
       value={value}
-      onChangeText={text => setValue(text)}
+      onChangeText={text => onChangeText(text, id)}
       placeholderTextColor={placeholderColor}
       autoCorrect={false}
       returnKeyType="next"
