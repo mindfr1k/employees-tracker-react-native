@@ -1,73 +1,60 @@
 import React, { useState, useRef } from 'react'
 import { Alert } from 'react-native'
-import ImagePicker from 'react-native-image-picker'
 
 import ActionButton from './ActionButton'
-import { StyledForm, StyledInput } from '../Styled'
+import { StyledForm } from '../Styled'
 
-const placeholderColor = '#777'
-
-const Form = ({ inputs, action, onSubmit }) => {
-  const [controls, setControls] = useState(inputs)
-  const inputRefs = useRef({})
-
-  const focusField = key => inputRefs.current[key].focus()
-
-  const inputChangedHandler = (text, id) => {
-    setControls(controls.map(control => control.id === id ? { ...control, value: text } : control))
-  }
-
-  const uploadImage = id => {
-    setControls(controls.map(control => control.id === id ? { ...control, value: 'Loading...' } : control))
-    ImagePicker.showImagePicker({
-      title: 'Select employee photo'
-    }, ({ didCancel, error, fileName }) => {
-      if (error)
-        console.log(error)
-      didCancel
-        ? setControls(controls.map(control => control.id === id ? { ...control, value: '' } : control))
-        : setControls(controls.map(control => {
-          return control.id === id ? { ...control, value: fileName } : control
-        }))
-    })
-  }
+const Form = ({ action, onSubmit, children }) => {
+  const [formData, setFormData] = useState(React.Children.toArray(children)
+    .reduce((acc, { props: { id } }) => ({
+      ...acc,
+      [id]: ''
+    }), {}))
+  const inputRefs = useRef([])
 
   const submitHandler = () => {
-    const invalidControl = controls
-      .filter(({ validation }) => validation)
-      .find(({ placeholder, value, validation }, i) => {
+    const inputs = [firstInput, ...formInputs, lastInput]
+    const invalidControl = inputs.filter(({ props: { validation } }) => validation)
+      .find(({ props: { validation, id, placeholder } }, i) => {
         const { required } = validation
-        if (required && value.trim() === '') {
-          validation['errorMessage'] = `${placeholder} is required!`
-          validation['errorRef'] = `field${i + 1}`
+        if (required && formData[id].trim() === '') {
+          validation.errorMessage = `${placeholder} is required!`
+          validation.errorRef = inputRefs.current[i]
           return true
         }
       })
-    invalidControl
-      ? Alert.alert(invalidControl.validation.errorMessage, `Please, fix this error.`, [{
+    if (invalidControl)
+      return Alert.alert(invalidControl.props.validation.errorMessage, `Please, fix this error.`, [{
         text: 'OK',
-        onPress: () => !invalidControl.isMediaInput && focusField(invalidControl.validation.errorRef)
+        onPress: () => invalidControl.props.validation.errorRef.focus()
       }])
-      : onSubmit(controls.reduce((acc, { id, value }) => ({ ...acc, [id]: value }), {}))
+    onSubmit(formData)
   }
 
-  const formInputs = controls.map(({ id, ...config }, i) => {
-    config['placeholderTextColor'] = placeholderColor
-    if (config.isMediaInput)
-      config['onFocus'] = () => uploadImage(id)
-    const inputProps = {
-      key: id,
-      ref: input => inputRefs.current[`field${i + 1}`] = input,
-      onChangeText: text => inputChangedHandler(text, id),
-      ...config
-    }
-    if (i === controls.length - 1)
-      return <StyledInput {...inputProps} />
-    return <StyledInput {...inputProps} onSubmitEditing={() => focusField(`field${i + 2}`)} />
+  const onTextChanged = (text, id) => {
+    setFormData({ ...formData, [id]: text })
+  }
+
+  const inputs = React.Children.map(children, (child, i) => React.cloneElement(child, {
+    onTextChanged,
+    onImageUploaded: onTextChanged,
+    ref: input => inputRefs.current.push(input),
+    onSubmitEditing: i === React.Children.count(children) - 1
+      ? undefined
+      : () => inputRefs.current[i + 1].focus()
+  }))
+  const firstInput = React.cloneElement(inputs[0], { autoFocus: true, first: true })
+  const lastInput = React.cloneElement(inputs[inputs.length - 1], {
+    returnKeyType: 'done',
+    last: true
   })
+  const formInputs = inputs.slice(1, -1)
+
   return (
     <StyledForm>
+      {firstInput}
       {formInputs}
+      {lastInput}
       <ActionButton title={action} onPress={submitHandler} />
     </StyledForm>
   )

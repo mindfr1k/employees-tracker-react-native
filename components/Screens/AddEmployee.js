@@ -1,83 +1,21 @@
 import React from 'react'
 
 import Form from '../UI/Form'
+import TextInput from '../UI/TextInput'
+import MediaInput from '../UI/MediaInput'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
 
-const addEmployeeInputs = [
-  {
-    id: 'surname',
-    placeholder: 'Surname',
-    value: '',
-    autoFocus: true,
-    autoCorrect: false,
-    enablesReturnKeyAutomatically: true,
-    returnKeyType: 'next',
-    validation: {
-      required: true
-    }
-  },
-  {
-    id: 'profilePic',
-    placeholder: 'Upload photo',
-    value: '',
-    returnKeyType: 'next',
-    first: true,
-    isMediaInput: true,
-    validation: { 
-      required: true
-    }
-  },
-  {
-    id: 'name',
-    placeholder: 'Name',
-    value: '',
-    autoCorrect: false,
-    enablesReturnKeyAutomatically: true,
-    returnKeyType: 'next',
-    validation: {
-      required: true
-    }
-  },
-  {
-    id: 'secondName',
-    placeholder: 'Second Name',
-    value: '',
-    autoCorrect: false,
-    enablesReturnKeyAutomatically: true,
-    returnKeyType: 'next',
-    validation: {
-      required: true
-    }
-  },
-  {
-    id: 'position',
-    placeholder: 'Position',
-    value: '',
-    autoCorrect: false,
-    enablesReturnKeyAutomatically: true,
-    returnKeyType: 'next',
-    validation: {
-      required: true
-    }
-  },
-  {
-    id: 'personnelNumber',
-    placeholder: 'Personnel Number',
-    value: '',
-    last: true,
-    autoCorrect: false,
-    enablesReturnKeyAutomatically: true,
-    returnKeyType: 'done',
-    validation: {
-      required: true
-    }
-  }
-]
-
 const AddEmployee = () => (
   <CenteredContainer>
-    <Form action="Add Employee" inputs={addEmployeeInputs} />
+    <Form action="Add Employee">
+      <TextInput id="surname" placeholder="Surname" validation={{ required: true }} />
+      <MediaInput id="profilePic" placeholder="Upload photo" validation={{ required: true }} />
+      <TextInput id="name" placeholder="Name" validation={{ required: true }} />
+      <TextInput id="secondName" placeholder="Second name" validation={{ required: true }} />
+      <TextInput id="position" placeholder="Position" validation={{ required: true }} />
+      <TextInput id="personnelNumber" placeholder="Personnel number" validation={{ required: true }} />
+    </Form>
   </CenteredContainer>
 )
 
