@@ -34,7 +34,7 @@ const App = ({ initLoading, token, authVerify }) => {
         }} />
       </>
     )
-    : <Stack.Screen name="AddEmployee" component={AddEmployee} options={{ headerShown: false }} />
+    : <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
   return (
     <SafeAreaProvider>
       <NavigationContainer>

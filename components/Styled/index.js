@@ -6,7 +6,6 @@ export const placeholderColor = '#777'
 export const CenteredContainer = styled.SafeAreaView`
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   background-color: #fff;
 `
@@ -14,23 +13,21 @@ export const CenteredContainer = styled.SafeAreaView`
 export const TopContainer = styled.SafeAreaView`
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
 `
 
 export const StyledHeaderContainer = styled.View`
-  width: 100%;
+  width: 95%;
+  margin: auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  align-self: flex-end;
 `
 
 export const StyledForm = styled.View`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 15px;
@@ -70,7 +67,7 @@ export const StyledButton = styled.Text`
 export const StyledSearch = styled.View`
   display: flex;
   flex-direction: row;
-  margin: 8px;
+  margin: 8px 0;
   padding: 5px;
   background-color: #efefef;
   border-radius: 5px;
