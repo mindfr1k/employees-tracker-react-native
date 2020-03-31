@@ -8,34 +8,35 @@ import TextInput from '../UI/TextInput'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
 
-const SignIn = ({ loading, error, token, authSignIn }) => {
-  const [isErrorSubmitted, setIsErrorSubmitted] = useState(true)
+const SignIn = ({ loading, error, authSignIn }) => {
+  const [alertPressed, setAlertPressed] = useState(true)
+  const form = (
+    <Form
+      action="Log In"
+      onSubmit={formData => {
+        authSignIn(formData)
+        setAlertPressed(false)
+      }}>
+      <TextInput id="username" placeholder="Username" validation={{ required: true }}
+        autoCapitalize="none" />
+      <TextInput id="password" placeholder="Password" validation={{ required: true }} />
+    </Form>
+  )
   return (
     <CenteredContainer>
-      {error && !isErrorSubmitted && Alert.alert(error, 'Please, try again.', [{
+      {error && !alertPressed && Alert.alert(error, 'Please, try again.', [{
         text: 'OK',
-        onPress: () => setIsErrorSubmitted(true)
+        onPress: () => setAlertPressed(true)
       }])}
       {loading
         ? <ActivityIndicator />
-        : (isErrorSubmitted && !token && (
-          <Form
-            action="Log In"
-            onSubmit={formData => {
-              authSignIn(formData)
-              setIsErrorSubmitted(false)
-            }}>
-            <TextInput id="username" placeholder="Username" validation={{ required: true }}
-              autoCapitalize="none" />
-            <TextInput id="password" placeholder="Password" validation={{ required: true }} />
-          </Form>
-        ))}
+        : alertPressed && form}
 
     </CenteredContainer>
   )
 }
 
-const mapStateToProps = ({ requestReducer: { loading, error, token } }) => ({ loading, error, token })
+const mapStateToProps = ({ requestReducer: { loading, error } }) => ({ loading, error })
 const mapDispatchToProps = dispatch => ({
   authSignIn: formData => dispatch(authSignIn(formData))
 })
