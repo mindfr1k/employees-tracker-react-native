@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ActivityIndicator, Alert } from 'react-native'
 import { connect } from 'react-redux'
 
-import { authSignIn } from '../../store/actions'
+import { authSignIn, clearRequestError } from '../../store/actions'
 import Form from '../UI/Form'
 import TextInput from '../UI/TextInput'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
 
-const SignIn = ({ loading, error, authSignIn }) => {
-  const [alertPressed, setAlertPressed] = useState(true)
+const SignIn = ({ loading, error, authSignIn, clearRequestError }) => {
+  console.log(error)
   const form = (
     <Form
       action="Log In"
-      onSubmit={formData => {
-        authSignIn(formData)
-        setAlertPressed(false)
-      }}>
+      onSubmit={formData => authSignIn(formData)}>
       <TextInput id="username" placeholder="Username" validation={{ required: true }}
         autoCapitalize="none" />
       <TextInput id="password" placeholder="Password" validation={{ required: true }} />
@@ -24,13 +21,13 @@ const SignIn = ({ loading, error, authSignIn }) => {
   )
   return (
     <CenteredContainer>
-      {error && !alertPressed && Alert.alert(error, 'Please, try again.', [{
+      {error && Alert.alert(error, 'Please, try again.', [{
         text: 'OK',
-        onPress: () => setAlertPressed(true)
+        onPress: () => clearRequestError()
       }])}
       {loading
         ? <ActivityIndicator />
-        : alertPressed && form}
+        : !error && form}
 
     </CenteredContainer>
   )
@@ -38,7 +35,8 @@ const SignIn = ({ loading, error, authSignIn }) => {
 
 const mapStateToProps = ({ requestReducer: { loading, error } }) => ({ loading, error })
 const mapDispatchToProps = dispatch => ({
-  authSignIn: formData => dispatch(authSignIn(formData))
+  authSignIn: formData => dispatch(authSignIn(formData)),
+  clearRequestError: () => dispatch(clearRequestError()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withKeyboardDismiss(SignIn))
