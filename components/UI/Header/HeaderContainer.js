@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
-import { StyledHeaderContainer } from '../../Styled'
+import { StyledHeaderContainer, placeholderColor } from '../../Styled'
 
 const flex = new Animated.Value(12)
 
@@ -38,7 +38,7 @@ const HeaderContainer = () => {
     <StyledHeaderContainer>
       <Animated.View style={{ flex }}>
         <SearchControl
-          placeholderColor="#888"
+          placeholderColor={placeholderColor}
           onFocus={onFocus}
           onBlur={onBlur}
           reference={searchInput} />

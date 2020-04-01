@@ -3,8 +3,9 @@ import { Animated } from 'react-native'
 
 import { ActionOpacity, StyledButton } from '../Styled'
 
+const scale = new Animated.Value(1)
+
 const ActionButton = ({ title, onPress }) => {
-  const scale = new Animated.Value(1)
   const animateScale = toValue => Animated.timing(scale, {
     toValue,
     duration: 100,

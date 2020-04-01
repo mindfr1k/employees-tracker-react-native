@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ActivityIndicator, Alert } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { authSignIn, clearRequestError } from '../../store/actions'
+import { authSignIn } from '../../store/actions'
 import Form from '../UI/Form'
 import TextInput from '../UI/TextInput'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'

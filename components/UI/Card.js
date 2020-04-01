@@ -1,15 +1,17 @@
 import React from 'react'
 import { TouchableOpacity, Text, Alert, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
+import {
+  CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton, cardFontSize
+} from '../Styled'
 
-const cardFontSize = 16
 const opacity = new Animated.Value(0)
 
-const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
+const Card = ({ profilePic, surname, name, personnelName, position }) => {
   const navigation = useNavigation()
+  const role = useSelector(({ requestReducer: { role } }) => role)
   return (
     <CardContainer>
       <CardImage
@@ -65,6 +67,4 @@ const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
   )
 }
 
-const mapStateToProps = ({ requestReducer: { role } }) => ({ role })
-
-export default connect(mapStateToProps)(Card)
+export default Card

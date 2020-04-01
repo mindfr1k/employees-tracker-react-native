@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 import { Animated } from 'react-native'
 
 export const placeholderColor = '#777'
+export const cardFontSize = 16
 
 export const CenteredContainer = styled.SafeAreaView`
   height: 100%;
