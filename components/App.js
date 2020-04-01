@@ -15,8 +15,8 @@ import HeaderContainer from './UI/Header/HeaderContainer'
 const Stack = createStackNavigator()
 
 const App = () => {
-  const { initLoading, token } = useSelector(({ verifyReducer: { initLoading },
-    requestReducer: { token } }) => ({
+  const { initLoading, token } = useSelector(({ requestReducer: { token },
+    initReducer: { initLoading } }) => ({
       initLoading,
       token
     }))
