@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import { ActivityIndicator, Alert } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { authSignIn } from '../../store/actions'
+import { authSignIn, authVerify } from '../../store/actions'
 import Form from '../UI/Form'
 import TextInput from '../UI/TextInput'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
 
 const SignIn = () => {
-  const { navigate } = useNavigation()
   const [isRequestIdle, setIsRequestIdle] = useState(true)
   const { loading, error } = useSelector(({ requestReducer: { loading, error } }) => ({ loading, error }))
   const dispatch = useDispatch()
@@ -33,8 +31,9 @@ const SignIn = () => {
       {error && !isRequestIdle && Alert.alert(error.message, 'Please, try again.', [{
         text: 'OK',
         onPress: () => {
-          error.unauthorized && navigate('SignIn')
           setIsRequestIdle(true)
+          if (error.unauthorized)
+            dispatch(authVerify())
         }
       }])}
     </CenteredContainer>

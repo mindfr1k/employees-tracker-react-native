@@ -17,10 +17,14 @@ export function* employeeAdd({ formData }) {
   if (status === 401)
     return yield put(requestFail({ unauthorized: true, message: 'PLease, log in again to proceed.' }))
   if (status === 400) {
-    const [{ dataPath, message }] = JSON.parse((yield response.json()).message)
-    return yield put(requestFail({ message: `${dataPath.slice(1)} ${message}` }))
+    const errorPayload = JSON.parse((yield response.json()).message)
+    if (Array.isArray(errorPayload)) {
+      const [{ dataPath, message }] = errorPayload
+      return yield put(requestFail({ message: `${dataPath.slice(1)} ${message}` }))
+    }
+    return yield put (requestFail({ message: errorPayload }))
   }
-  if (status === 200) {
+  if (status === 201) {
     const res = yield response.json()
     console.log(res)
     return yield put(requestSuccess({ res }))

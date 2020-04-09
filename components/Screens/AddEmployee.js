@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { ActivityIndicator, Alert } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { employeeAdd, authVerify } from '../../store/actions'
@@ -11,7 +10,6 @@ import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
 
 const AddEmployee = () => {
-  const { navigate } = useNavigation()
   const [isRequestIdle, setIsRequestIdle] = useState(true)
   const { loading, error } = useSelector(({ requestReducer: { loading, error } }) => ({ loading, error }))
   const dispatch = useDispatch()
