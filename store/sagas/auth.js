@@ -2,27 +2,27 @@ import { put, call } from 'redux-saga/effects'
 import AsyncStorage from '@react-native-community/async-storage'
 import jwtDecode from 'jwt-decode'
 
+import { baseUrl } from './constants'
 import { requestStart, requestSuccess, requestFail, verifyStart, verifyEnd } from '../actions'
-
-const baseUrl = 'http://localhost:3502/api'
 
 export function* authSignIn({ formData }) {
   yield put(requestStart())
+  const requestData = formData._parts.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
   const response = yield fetch(`${baseUrl}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(formData)
+    body: JSON.stringify(requestData)
   })
   const { status } = response
   if (status === 404)
-    return yield put(requestFail('User was not found'))
+    return yield put(requestFail({ message: 'User was not found' }))
   if (status === 401)
-    return yield put(requestFail('Incorrect username and/or password'))
+    return yield put(requestFail({ unauthorized: true, message: 'Incorrect username and/or password' }))
   if (status === 400) {
     const [{ dataPath, message }] = JSON.parse((yield response.json()).message)
-    return yield put(requestFail(`${dataPath.slice(1)} ${message}`))
+    return yield put(requestFail({ message: `${dataPath.slice(1)} ${message}` }))
   }
   if (status === 200) {
     const res = yield response.json()
@@ -32,7 +32,7 @@ export function* authSignIn({ formData }) {
     return yield put(requestSuccess({ token, role }))
   }
   const { message } = yield response.json()
-  return yield put(requestFail(message))
+  return yield put(requestFail({ message }))
 }
 
 export function* authVerify() {

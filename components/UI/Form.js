@@ -28,7 +28,9 @@ const Form = ({ action, onSubmit, children }) => {
         text: 'OK',
         onPress: () => invalidControl.props.validation.errorRef.focus()
       }])
-    onSubmit(formData)
+    const requestData = new FormData()
+    Object.entries(formData).forEach(([key, value]) => requestData.append(key, value))
+    onSubmit(requestData)
   }
 
   const onTextChanged = (text, id) => {
