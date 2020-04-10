@@ -15,7 +15,7 @@ export function* employeeAdd({ formData }) {
   })
   const { status } = response
   if (status === 401)
-    return yield put(requestFail({ unauthorized: true, message: 'PLease, log in again to proceed.' }))
+    return yield put(requestFail({ unauthorized: true, message: 'Log in again to proceed.' }))
   if (status === 400) {
     const errorPayload = JSON.parse((yield response.json()).message)
     if (Array.isArray(errorPayload)) {
