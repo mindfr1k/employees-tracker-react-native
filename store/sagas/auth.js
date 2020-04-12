@@ -2,7 +2,7 @@ import { put, call } from 'redux-saga/effects'
 import AsyncStorage from '@react-native-community/async-storage'
 import jwtDecode from 'jwt-decode'
 
-import { baseUrl } from './constants'
+import { baseUrl, handleBadRequest } from './util'
 import { requestStart, requestSuccess, requestFail, verifyStart, verifyEnd } from '../actions'
 
 export function* authSignIn({ formData }) {
@@ -21,8 +21,8 @@ export function* authSignIn({ formData }) {
   if (status === 401)
     return yield put(requestFail({ unauthorized: true, message: 'Incorrect username and/or password' }))
   if (status === 400) {
-    const [{ dataPath, message }] = JSON.parse((yield response.json()).message)
-    return yield put(requestFail({ message: `${dataPath.slice(1)} ${message}` }))
+    const errorPayload = JSON.parse((yield response.json()).message)
+    return yield put(requestFail(handleBadRequest(errorPayload)))
   }
   if (status === 200) {
     const res = yield response.json()

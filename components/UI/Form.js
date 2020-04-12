@@ -11,10 +11,10 @@ const Form = ({ caption, action, onSubmitCb, children }) => {
   const { loading, error } = useSelector(({ requestReducer: { loading, error } }) => ({ loading, error }))
   const dispatch = useDispatch()
 
-  const [formTextData, setFormTextData] = useState(React.Children.toArray(children)
+  const [formTextData, setFormTextData] = useState(children
     .filter(({ props: { type } }) => type !== 'file')
     .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))
-  const [formMediaData, setFormMediaData] = useState(React.Children.toArray(children)
+  const [formMediaData, setFormMediaData] = useState(children
     .filter(({ props: { type } }) => type === 'file')
     .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))
   const inputRefs = useRef({})
@@ -35,6 +35,8 @@ const Form = ({ caption, action, onSubmitCb, children }) => {
     Object.entries(formMediaData).forEach(([key, value]) => requestData.append(key, value))
     dispatch(action(requestData))
     setIsRequestIdle(false)
+    setFormTextData(children.filter(({ props: { type } }) => type !== 'file')
+      .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))
   }
 
   const onTextChanged = (data, id) => {
@@ -64,16 +66,14 @@ const Form = ({ caption, action, onSubmitCb, children }) => {
     <StyledForm>
       {loading
         ? <ActivityIndicator />
-        : isRequestIdle
-          ? (
-            <>
-              {firstInput}
-              {formInputs}
-              {lastInput}
-              <ActionButton title={caption} onPress={submitHandler} />
-            </>
-          )
-          : onSubmitCb && onSubmitCb()}
+        : isRequestIdle && (
+          <>
+            {firstInput}
+            {formInputs}
+            {lastInput}
+            <ActionButton title={caption} onPress={submitHandler} />
+          </>
+        )}
       {error && !isRequestIdle && Alert.alert(error.message, 'Please, try again.', [{
         text: 'OK',
         onPress: () => {
