@@ -3,7 +3,7 @@ import ImagePicker from 'react-native-image-picker'
 
 import { StyledInput, placeholderColor } from '../Styled'
 
-const MediaInput = ({ id, placeholder, validation, onImageUploaded, onSubmitEditing, ...config }, ref) => {
+const MediaInput = ({ id, placeholder, validation, onSubmitEditing, onImageUploaded, ...config }, ref) => {
   const [value, setValue] = useState('')
   const inputRef = useRef(null)
   useImperativeHandle(ref, () => inputRef.current)
@@ -11,16 +11,21 @@ const MediaInput = ({ id, placeholder, validation, onImageUploaded, onSubmitEdit
   const uploadImage = () => {
     setValue('Uploading...')
     ImagePicker.showImagePicker({
-      title: 'Select employee photo'
-    }, ({ didCancel, error, uri }) => {
+      title: 'Select employee photo',
+      noData: true,
+      quality: 0.1,
+      maxHeight: 200,
+      maxWidth: 200
+    }, ({ didCancel, error, uri, type, fileName }) => {
       if (error)
         console.log(error)
       if (didCancel) {
         setValue('')
+        onImageUploaded('', id)
         return onSubmitEditing()
       }
       setValue(uri)
-      onImageUploaded(uri, id)
+      onImageUploaded({ uri, type, name: fileName }, id)
       onSubmitEditing()
     })
   }

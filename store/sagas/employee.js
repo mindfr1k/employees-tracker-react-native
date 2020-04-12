@@ -22,7 +22,7 @@ export function* employeeAdd({ formData }) {
       const [{ dataPath, message }] = errorPayload
       return yield put(requestFail({ message: `${dataPath.slice(1)} ${message}` }))
     }
-    return yield put (requestFail({ message: errorPayload }))
+    return yield put(requestFail({ message: errorPayload }))
   }
   if (status === 201) {
     const res = yield response.json()
