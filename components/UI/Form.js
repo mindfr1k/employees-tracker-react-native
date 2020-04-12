@@ -66,14 +66,16 @@ const Form = ({ caption, action, onSubmitCb, children }) => {
     <StyledForm>
       {loading
         ? <ActivityIndicator />
-        : isRequestIdle && (
-          <>
-            {firstInput}
-            {formInputs}
-            {lastInput}
-            <ActionButton title={caption} onPress={submitHandler} />
-          </>
-        )}
+        : isRequestIdle
+          ? (
+            <>
+              {firstInput}
+              {formInputs}
+              {lastInput}
+              <ActionButton title={caption} onPress={submitHandler} />
+            </>
+          )
+          : !error && onSubmitCb && onSubmitCb()}
       {error && !isRequestIdle && Alert.alert(error.message, 'Please, try again.', [{
         text: 'OK',
         onPress: () => {

@@ -22,7 +22,6 @@ export function* employeeAdd({ formData }) {
   }
   if (status === 201) {
     const res = yield response.json()
-    console.log(res)
     return yield put(requestSuccess({ res }))
   }
   const { message } = yield response.json()
