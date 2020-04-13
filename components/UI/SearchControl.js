@@ -1,20 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Icon from 'react-native-ionicons'
+import { useDispatch } from 'react-redux'
 
-import { StyledSearch, SearchInput } from '../Styled'
+import { employeeGet } from '../../store/actions'
+import { StyledSearch, SearchInput, placeholderColor } from '../Styled'
 
 const iconSize = 16
 
-const SearchControl = ({ placeholderColor, onFocus, onBlur, reference }) => {
+const SearchControl = ({ onFocus, onBlur, reference }) => {
+  const [value, setValue] = useState('')
+  const dispatch = useDispatch()
   return (
     <StyledSearch>
       <Icon name="search" size={iconSize} color={placeholderColor} />
       <SearchInput
+        value={value}
         ref={reference}
         autoCorrect={false}
         enablesReturnKeyAutomatically
         placeholderTextColor={placeholderColor}
-        placeholder="Enter id or surname"
+        placeholder="Enter personnel number or surname"
+        onChangeText={text => setValue(text)}
+        onSubmitEditing={() => dispatch(employeeGet(value))}
         onFocus={onFocus}
         onBlur={onBlur} />
     </StyledSearch>

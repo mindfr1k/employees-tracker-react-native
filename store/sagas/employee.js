@@ -21,8 +21,31 @@ export function* employeeAdd({ formData }) {
     return yield put(requestFail(handleBadRequest(errorPayload)))
   }
   if (status === 201) {
-    const res = yield response.json()
-    return yield put(requestSuccess({ res }))
+    const employeeAdded = yield response.json()
+    return yield put(requestSuccess({ employeeAdded }))
+  }
+  const { message } = yield response.json()
+  return yield put(requestFail({ message }))
+}
+
+export function* employeeGet({ query }) {
+  yield put(requestStart())
+  const response = yield fetch(`${baseUrl}/employees/?query=${query}`, {
+    headers: {
+      'Authorization': `Bearer ${yield AsyncStorage.getItem('@employeesTracker:token')}`
+    }
+  })
+  const { status } = response
+  if (status === 404)
+    return yield put(requestFail({ message: 'Sorry, there is no corresponding employee.' }))
+  if (status === 400) {
+    const errorPayload = JSON.parse((yield response.json()).message)
+    return yield put(requestFail(handleBadRequest(errorPayload)))
+  }
+  if (status === 200) {
+    const employees = yield response.json()
+    console.log(employees)
+    return yield put(requestSuccess({ employees }))
   }
   const { message } = yield response.json()
   return yield put(requestFail({ message }))
