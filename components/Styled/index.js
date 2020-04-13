@@ -14,7 +14,7 @@ export const CenteredContainer = styled.SafeAreaView`
 export const TopContainer = styled.SafeAreaView`
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
 `
 
 export const StyledHeaderContainer = styled.View`

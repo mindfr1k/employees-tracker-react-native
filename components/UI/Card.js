@@ -7,9 +7,8 @@ import {
   CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton, cardFontSize
 } from '../Styled'
 
-const opacity = new Animated.Value(0)
-
-const Card = ({ profilePic, surname, name, personnelName, position }) => {
+const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position }) => {
+  const opacity = new Animated.Value(0)
   const { navigate } = useNavigation()
   const role = useSelector(({ requestReducer: { role } }) => role)
   return (
@@ -21,7 +20,7 @@ const Card = ({ profilePic, surname, name, personnelName, position }) => {
           Animated.timing(opacity, { toValue: 1, duration: 500 }).start()
         }}
       />
-      <CardHeader>{`${surname} ${name}`}</CardHeader>
+      <CardHeader>{`${surname} ${name} ${secondName}`}</CardHeader>
       <CardText>
         Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
         {`\n${position}`}

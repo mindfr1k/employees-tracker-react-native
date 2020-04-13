@@ -1,40 +1,31 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, ActivityIndicator } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import Card from '../UI/Card'
-import { TopContainer } from '../Styled'
-
-const data = [
-  {
-    id: '12839812938',
-    personnelName: '1',
-    surname: 'Simple',
-    name: 'Guy',
-    secondName: 'Redundant',
-    position: 'Factory worker',
-    profilePic: 'https://picsum.photos/500/400'
-  },
-  {
-    id: '12839812939',
-    personnelName: '2',
-    surname: 'Eloquent',
-    name: 'Dude',
-    secondName: 'Redundant',
-    position: 'Packager',
-    profilePic: 'https://picsum.photos/1000/700'
-  }
-]
+import { TopContainer, StyledText } from '../Styled'
 
 const EmployeeInfo = () => {
+  const { error, loading, employees, role } = useSelector(({
+    requestReducer: { error, loading, employees, role }
+  }) => ({ error, loading, employees, role }))
+  const welcomeMessage = `Please, start searching${role === 'hr'
+    ? ' or press "+" button to add employee'
+    : ''}.`
   return (
     <TopContainer>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => {
-          const { secondName, ...rest } = item
-          return <Card {...rest} />
-        }}
-        keyExtractor={({ id }) => id} />
+      {loading
+        ? <ActivityIndicator />
+        : error
+          ? <StyledText style={{ padding: 20 }}>{error.message}</StyledText>
+          : employees
+            ? (
+              <FlatList
+                data={employees.employee}
+                renderItem={({ item }) => <Card {...item} />}
+                keyExtractor={({ _id }) => _id} />
+            )
+            : <StyledText style={{ padding: 20 }}>{welcomeMessage}</StyledText>}
     </TopContainer>
   )
 }

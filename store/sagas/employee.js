@@ -30,7 +30,7 @@ export function* employeeAdd({ formData }) {
 
 export function* employeeGet({ query }) {
   yield put(requestStart())
-  const response = yield fetch(`${baseUrl}/employees/?query=${query}`, {
+  const response = yield fetch(`${baseUrl}/employees?query=${query}`, {
     headers: {
       'Authorization': `Bearer ${yield AsyncStorage.getItem('@employeesTracker:token')}`
     }
@@ -44,7 +44,6 @@ export function* employeeGet({ query }) {
   }
   if (status === 200) {
     const employees = yield response.json()
-    console.log(employees)
     return yield put(requestSuccess({ employees }))
   }
   const { message } = yield response.json()
