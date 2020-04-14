@@ -3,6 +3,7 @@ import { FlatList, ActivityIndicator } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import Card from '../UI/Card'
+import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { TopContainer, StyledText } from '../Styled'
 
 const EmployeeInfo = () => {
@@ -30,4 +31,4 @@ const EmployeeInfo = () => {
   )
 }
 
-export default EmployeeInfo
+export default withKeyboardDismiss(EmployeeInfo)

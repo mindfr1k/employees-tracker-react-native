@@ -12,11 +12,12 @@ const HeaderContainer = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const navigation = useNavigation()
   const searchInput = useRef()
-  const flex = useRef(new Animated.Value(12)).current
+  const initFlexValue = role === 'hr' ? 12 : 200
+  const flex = useRef(new Animated.Value(initFlexValue)).current
 
   const animateFlex = toValue => Animated.timing(flex, {
     toValue,
-    duration: 500
+    duration: 200
   })
   const onFocus = () => {
     animateFlex(5).start(() => {
@@ -25,16 +26,18 @@ const HeaderContainer = () => {
   }
   const onBlur = () => {
     setIsSearchFocused(false)
-    animateFlex(12).start()
+    animateFlex(initFlexValue).start()
     searchInput.current.clear()
   }
   const headerButton = isSearchFocused
-    ? <HeaderButton
-      title="Cancel"
-      onPress={() => {
-        Keyboard.dismiss()
-        onBlur()
-      }} />
+    ? (
+      <HeaderButton
+        title="Cancel"
+        onPress={() => {
+          Keyboard.dismiss()
+          onBlur()
+        }} />
+    )
     : role === 'hr' && (
       <Button
         title="+"
