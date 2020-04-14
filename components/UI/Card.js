@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { TouchableOpacity, Text, Alert, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import {
 } from '../Styled'
 
 const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position }) => {
-  const opacity = new Animated.Value(0)
+  const opacity = useRef(new Animated.Value(0)).current
   const { navigate } = useNavigation()
   const role = useSelector(({ requestReducer: { role } }) => role)
   return (

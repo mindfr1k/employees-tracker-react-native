@@ -1,23 +1,27 @@
 import React, { useState, useRef } from 'react'
 import { Button, Animated, Keyboard } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 import HeaderButton from './HeaderButton'
 import SearchControl from '../SearchControl'
 import { StyledHeaderContainer } from '../../Styled'
 
-const flex = new Animated.Value(12)
-
 const HeaderContainer = () => {
-  const navigation = useNavigation()
+  const role = useSelector(({ requestReducer: { role } }) => role)
   const [isSearchFocused, setIsSearchFocused] = useState(false)
+  const navigation = useNavigation()
   const searchInput = useRef()
+  const flex = useRef(new Animated.Value(12)).current
+
   const animateFlex = toValue => Animated.timing(flex, {
     toValue,
-    duration: 200
+    duration: 500
   })
   const onFocus = () => {
-    animateFlex(5).start(() => setIsSearchFocused(true))
+    animateFlex(5).start(() => {
+      setIsSearchFocused(true)
+    })
   }
   const onBlur = () => {
     setIsSearchFocused(false)
@@ -31,9 +35,11 @@ const HeaderContainer = () => {
         Keyboard.dismiss()
         onBlur()
       }} />
-    : <Button
-      title="+"
-      onPress={() => navigation.navigate('AddEmployee')} />
+    : role === 'hr' && (
+      <Button
+        title="+"
+        onPress={() => navigation.navigate('AddEmployee')} />
+    )
   return (
     <StyledHeaderContainer>
       <Animated.View style={{ flex }}>
