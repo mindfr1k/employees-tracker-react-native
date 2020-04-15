@@ -1,6 +1,6 @@
 # Employees Tracker iOS App
 
-> iOS application for monitoring employees' working schedule.
+> iOS application for monitoring employees.
 
 ## Setup
 #### Backend can be downloaded and installed from here: [Employees Tracker Web App](https://github.com/mindfr1k/employees-tracker-web-app)
