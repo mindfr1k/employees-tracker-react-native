@@ -8,10 +8,9 @@ const initState = {
 export default (state = initState, { type, ...payload }) => {
   switch (type) {
     case REQUEST_START:
-      return { ...state, loading: true, error: null }
+      return { ...state, loading: true, error: null, employees: null }
     case REQUEST_SUCCESS:
-      const { token, role } = payload
-      return { ...state, loading: false, token, role }
+      return { ...state, loading: false, ...payload }
     case REQUEST_FAIL:
       const { error } = payload
       return { ...state, loading: false, error }

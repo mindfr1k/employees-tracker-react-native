@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { authVerify } from '../store/actions'
 import InitLoading from './Screens/InitLoading'
@@ -14,9 +14,15 @@ import HeaderContainer from './UI/Header/HeaderContainer'
 
 const Stack = createStackNavigator()
 
-const App = ({ initLoading, token, authVerify }) => {
+const App = () => {
+  const { initLoading, token } = useSelector(({ requestReducer: { token },
+    initReducer: { initLoading } }) => ({
+      initLoading,
+      token
+    }))
+  const dispatch = useDispatch()
   useEffect(() => {
-    authVerify()
+    dispatch(authVerify())
   }, [])
   if (initLoading)
     return <InitLoading />
@@ -47,12 +53,4 @@ const App = ({ initLoading, token, authVerify }) => {
   )
 }
 
-const mapStateToProps = ({ verifyReducer: { initLoading }, requestReducer: { token } }) => ({
-  initLoading,
-  token
-})
-const mapDispatchToProps = dispatch => ({
-  authVerify: () => dispatch(authVerify())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

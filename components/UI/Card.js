@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { TouchableOpacity, Text, Alert, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton } from '../Styled'
+import { employeeDelete } from '../../store/actions'
+import {
+  CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton, cardFontSize
+} from '../Styled'
 
-const cardFontSize = 16
-const opacity = new Animated.Value(0)
-
-const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
-  const navigation = useNavigation()
+const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position }) => {
+  const opacity = useRef(new Animated.Value(0)).current
+  const role = useSelector(({ requestReducer: { role } }) => role)
+  const dispatch = useDispatch()
+  const { navigate } = useNavigation()
   return (
     <CardContainer>
       <CardImage
@@ -19,7 +22,7 @@ const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
           Animated.timing(opacity, { toValue: 1, duration: 500 }).start()
         }}
       />
-      <CardHeader>{`${surname} ${name}`}</CardHeader>
+      <CardHeader>{`${surname} ${name} ${secondName}`}</CardHeader>
       <CardText>
         Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
         {`\n${position}`}
@@ -37,7 +40,7 @@ const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
       {role === 'hr' && (
         <>
           <TouchableOpacity
-            onPress={() => navigation.navigate('UpdateEmployee')}>
+            onPress={() => navigate('UpdateEmployee', { employeeId: _id })}>
             <StyledButton
               color="#008bd1"
               fontSize={cardFontSize}>
@@ -51,7 +54,8 @@ const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
                 text: 'Cancel'
               }, {
                 text: 'OK',
-                style: 'destructive'
+                style: 'destructive',
+                onPress: () => dispatch(employeeDelete(_id))
               }])}>
             <StyledButton
               color="#f00"
@@ -65,6 +69,4 @@ const Card = ({ profilePic, surname, name, personnelName, position, role }) => {
   )
 }
 
-const mapStateToProps = ({ requestReducer: { role } }) => ({ role })
-
-export default connect(mapStateToProps)(Card)
+export default Card
