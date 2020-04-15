@@ -6,7 +6,7 @@ import { authVerify } from '../../store/actions'
 import ActionButton from './ActionButton'
 import { StyledForm } from '../Styled'
 
-const Form = ({ caption, action, onSubmitCb, children }) => {
+const Form = ({ caption, action, employeeId, onSubmitCb, children }) => {
   const [isRequestIdle, setIsRequestIdle] = useState(true)
   const { loading, error } = useSelector(({ requestReducer: { loading, error } }) => ({ loading, error }))
   const dispatch = useDispatch()
@@ -31,9 +31,11 @@ const Form = ({ caption, action, onSubmitCb, children }) => {
       }])
     }
     const requestData = new FormData()
-    Object.entries(formTextData).forEach(([key, value]) => requestData.append(key, value))
-    Object.entries(formMediaData).forEach(([key, value]) => requestData.append(key, value))
-    dispatch(action(requestData))
+    Object.entries(formTextData).forEach(([key, value]) => value && requestData.append(key, value))
+    Object.entries(formMediaData).forEach(([key, value]) => value && requestData.append(key, value))
+    employeeId
+    ? dispatch(action(requestData, employeeId))
+    : dispatch(action(requestData))
     setIsRequestIdle(false)
     setFormTextData(children.filter(({ props: { type } }) => type !== 'file')
       .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))

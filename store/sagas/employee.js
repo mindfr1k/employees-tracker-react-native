@@ -49,3 +49,27 @@ export function* employeeGet({ query }) {
   const { message } = yield response.json()
   return yield put(requestFail({ message }))
 }
+
+export function* employeeUpdate({id, formData }) {
+  console.log(formData)
+  yield put(requestStart())
+  const response = yield fetch(`${baseUrl}/employee/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${yield AsyncStorage.getItem('@employeesTracker:token')}`
+    },
+    body: formData
+  })
+  const { status } = response
+  if (status === 400) {
+    const errorPayload = JSON.parse((yield response.json()).message)
+    return yield put(requestFail(handleBadRequest(errorPayload)))
+  }
+  if (status === 200) {
+    const employeeUpdated = yield response.json()
+    console.log(employeeUpdated)
+    return yield put(requestSuccess({ employeeUpdated }))
+  }
+  const { message } = yield response.json()
+  return yield put(requestFail({ message }))
+}

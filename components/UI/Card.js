@@ -9,8 +9,8 @@ import {
 
 const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position }) => {
   const opacity = useRef(new Animated.Value(0)).current
-  const { navigate } = useNavigation()
   const role = useSelector(({ requestReducer: { role } }) => role)
+  const { navigate } = useNavigation()
   return (
     <CardContainer>
       <CardImage
@@ -38,7 +38,7 @@ const Card = ({ _id, profilePic, surname, name, secondName, personnelName, posit
       {role === 'hr' && (
         <>
           <TouchableOpacity
-            onPress={() => navigate('UpdateEmployee')}>
+            onPress={() => navigate('UpdateEmployee', { employeeId: _id })}>
             <StyledButton
               color="#008bd1"
               fontSize={cardFontSize}>

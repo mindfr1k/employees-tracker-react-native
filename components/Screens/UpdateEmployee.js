@@ -1,6 +1,7 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
+import { employeeUpdate } from '../../store/actions'
 import Form from '../UI/Form'
 import TextInput from '../UI/TextInput'
 import MediaInput from '../UI/MediaInput'
@@ -9,9 +10,14 @@ import { CenteredContainer } from '../Styled'
 
 const UpdateEmployee = () => {
   const { navigate } = useNavigation()
+  const { params: { employeeId } } = useRoute()
   return (
     <CenteredContainer>
-      <Form caption="Update Employee" onSubmitCb={() => navigate('EmployeeInfo')}>
+      <Form
+        caption="Update Employee"
+        action={employeeUpdate}
+        employeeId={employeeId}
+        onSubmitCb={() => navigate('EmployeeInfo')}>
         <TextInput id="surname" placeholder="Surname" />
         <MediaInput id="profilePic" placeholder="Upload photo" />
         <TextInput id="name" placeholder="Name" />
