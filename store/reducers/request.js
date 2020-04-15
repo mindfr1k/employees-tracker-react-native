@@ -8,7 +8,7 @@ const initState = {
 export default (state = initState, { type, ...payload }) => {
   switch (type) {
     case REQUEST_START:
-      return { ...state, loading: true, error: null }
+      return { ...state, loading: true, error: null, employees: null }
     case REQUEST_SUCCESS:
       return { ...state, loading: false, ...payload }
     case REQUEST_FAIL:

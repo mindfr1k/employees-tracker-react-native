@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { TouchableOpacity, Text, Alert, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { employeeDelete } from '../../store/actions'
 import {
   CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton, cardFontSize
 } from '../Styled'
@@ -10,6 +11,7 @@ import {
 const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position }) => {
   const opacity = useRef(new Animated.Value(0)).current
   const role = useSelector(({ requestReducer: { role } }) => role)
+  const dispatch = useDispatch()
   const { navigate } = useNavigation()
   return (
     <CardContainer>
@@ -52,7 +54,8 @@ const Card = ({ _id, profilePic, surname, name, secondName, personnelName, posit
                 text: 'Cancel'
               }, {
                 text: 'OK',
-                style: 'destructive'
+                style: 'destructive',
+                onPress: () => dispatch(employeeDelete(_id))
               }])}>
             <StyledButton
               color="#f00"

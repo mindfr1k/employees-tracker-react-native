@@ -13,7 +13,6 @@ const MediaInput = ({ id, placeholder, validation, onSubmitEditing, onImageUploa
     ImagePicker.showImagePicker({
       title: 'Select employee photo',
       noData: true,
-      quality: 0.1,
       maxHeight: 200,
       maxWidth: 200
     }, ({ didCancel, error, uri, type, fileName }) => {

@@ -50,8 +50,7 @@ export function* employeeGet({ query }) {
   return yield put(requestFail({ message }))
 }
 
-export function* employeeUpdate({id, formData }) {
-  console.log(formData)
+export function* employeeUpdate({ id, formData }) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employee/${id}`, {
     method: 'PATCH',
@@ -67,8 +66,28 @@ export function* employeeUpdate({id, formData }) {
   }
   if (status === 200) {
     const employeeUpdated = yield response.json()
-    console.log(employeeUpdated)
     return yield put(requestSuccess({ employeeUpdated }))
+  }
+  const { message } = yield response.json()
+  return yield put(requestFail({ message }))
+}
+
+export function* employeeDelete({ id }) {
+  yield put(requestStart())
+  const response = yield fetch(`${baseUrl}/employee/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${yield AsyncStorage.getItem('@employeesTracker:token')}`
+    }
+  })
+  const { status } = response
+  if (status === 400) {
+    const errorPayload = JSON.parse((yield response.json()).message)
+    return yield put(requestFail(handleBadRequest(errorPayload)))
+  }
+  if (status === 204) {
+    yield response
+    return yield put(requestSuccess({ employeeDeleted: true }))
   }
   const { message } = yield response.json()
   return yield put(requestFail({ message }))

@@ -34,8 +34,8 @@ const Form = ({ caption, action, employeeId, onSubmitCb, children }) => {
     Object.entries(formTextData).forEach(([key, value]) => value && requestData.append(key, value))
     Object.entries(formMediaData).forEach(([key, value]) => value && requestData.append(key, value))
     employeeId
-    ? dispatch(action(requestData, employeeId))
-    : dispatch(action(requestData))
+      ? dispatch(action(requestData, employeeId))
+      : dispatch(action(requestData))
     setIsRequestIdle(false)
     setFormTextData(children.filter(({ props: { type } }) => type !== 'file')
       .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))
