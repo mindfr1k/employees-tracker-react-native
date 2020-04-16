@@ -7,9 +7,10 @@ import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { TopContainer, StyledText } from '../Styled'
 
 const EmployeeInfo = () => {
-  const { error, loading, employees, role } = useSelector(({
-    requestReducer: { error, loading, employees, role }
-  }) => ({ error, loading, employees, role }))
+  const error = useSelector(({ requestReducer: { error } }) => error)
+  const loading = useSelector(({ requestReducer: { loading } }) => loading)
+  const employees = useSelector(({ requestReducer: { employees } }) => employees)
+  const role = useSelector(({ requestReducer: { role } }) => role)
   const welcomeMessage = `Please, start searching${role === 'hr'
     ? ' or press "+" button to add employee'
     : ''}.`

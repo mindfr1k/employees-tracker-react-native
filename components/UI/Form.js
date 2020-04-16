@@ -7,8 +7,9 @@ import ActionButton from './ActionButton'
 import { StyledForm } from '../Styled'
 
 const Form = ({ caption, action, employeeId, onSubmitCb, children }) => {
+  const loading = useSelector(({ requestReducer: { loading } }) => loading)
+  const error = useSelector(({ requestReducer: { error } }) => error)
   const [isRequestIdle, setIsRequestIdle] = useState(true)
-  const { loading, error } = useSelector(({ requestReducer: { loading, error } }) => ({ loading, error }))
   const dispatch = useDispatch()
 
   const [formTextData, setFormTextData] = useState(children
