@@ -1,15 +1,15 @@
 import { VERIFY_START, VERIFY_END } from '../actions/action-types'
 
 const initState = {
-  initLoading: false
+  loading: false
 }
 
 export default (state = initState, { type }) => {
   switch (type) {
     case VERIFY_START:
-      return { ...state, initLoading: true }
+      return { ...state, loading: true }
     case VERIFY_END:
-      return { ...state, initLoading: false }
+      return { ...state, loading: false }
     default:
       return state
   }

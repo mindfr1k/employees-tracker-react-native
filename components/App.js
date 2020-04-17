@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react'
+import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
@@ -15,13 +15,13 @@ import HeaderContainer from './UI/Header/HeaderContainer'
 const Stack = createStackNavigator()
 
 const App = () => {
-  const initLoading = useSelector(({ initReducer: { initLoading } }) => initLoading)
+  const loading = useSelector(({ authReducer: { loading } }) => loading)
   const token = useSelector(({ requestReducer: { token } }) => token)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(authVerify())
   }, [])
-  if (initLoading)
+  if (loading)
     return <InitLoading />
   const routes = token
     ? (
