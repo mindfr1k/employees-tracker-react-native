@@ -20,23 +20,27 @@ const Form = ({ caption, action, employeeId, onSubmitCb, children }) => {
     .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))
   const inputRefs = useRef({})
 
-  const submitHandler = () => {
+  const validateFields = () => {
     const invalidField = children
       .filter(({ props: { validation, type } }) => validation && validation.required && type !== 'file')
       .find(({ props: { id } }) => formTextData[id].trim() === '')
     if (invalidField) {
       const { props: { id, placeholder } } = invalidField
-      return Alert.alert(`${placeholder} is required!`, `Please, fix this error.`, [{
+      return Alert.alert(`${placeholder} is required!`, 'Please, fix this error.', [{
         text: 'OK',
         onPress: () => inputRefs.current[id].focus()
       }])
     }
+  }
+
+  const submitHandler = () => {
+    validateFields()
     const requestData = new FormData()
     Object.entries(formTextData).forEach(([key, value]) => value && requestData.append(key, value))
     Object.entries(formMediaData).forEach(([key, value]) => value && requestData.append(key, value))
-    employeeId
-      ? dispatch(action(requestData, employeeId))
-      : dispatch(action(requestData))
+    if (!requestData._parts.length)
+      return Alert.alert('Fill at least one field!', 'Please, fix this error.')
+    dispatch(action(requestData, employeeId))
     setIsRequestIdle(false)
     setFormTextData(children.filter(({ props: { type } }) => type !== 'file')
       .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))
