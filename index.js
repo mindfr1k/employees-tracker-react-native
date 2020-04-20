@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppRegistry } from 'react-native'
 import { applyMiddleware, createStore, combineReducers } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 
@@ -12,7 +13,7 @@ import { name } from './app.json'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(combineReducers({ requestReducer, authReducer }),
-  applyMiddleware(sagaMiddleware))
+  composeWithDevTools(applyMiddleware(sagaMiddleware)))
 sagaMiddleware.run(rootSaga)
 const AppContainer = () => (
   <Provider store={store}>

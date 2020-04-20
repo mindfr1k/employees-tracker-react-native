@@ -1,10 +1,11 @@
 import { takeEvery, all } from 'redux-saga/effects'
 
 import {
-  AUTH_SIGNIN, AUTH_VERIFY, EMPLOYEE_ADD, EMPLOYEE_GET, EMPLOYEE_UPDATE, EMPLOYEE_DELETE
+  AUTH_SIGNIN, AUTH_VERIFY, EMPLOYEE_ADD, EMPLOYEE_GET, EMPLOYEE_UPDATE, EMPLOYEE_DELETE, SCHEDULE_UPDATE
 } from '../actions/action-types'
 import { authSignIn, authVerify } from './auth'
 import { employeeAdd, employeeGet, employeeUpdate, employeeDelete } from './employee'
+import { scheduleUpdate } from './schedule'
 
 function* watchAuth() {
   yield takeEvery(AUTH_SIGNIN, authSignIn)
@@ -18,9 +19,14 @@ function* watchEmployee() {
   yield takeEvery(EMPLOYEE_DELETE, employeeDelete)
 }
 
+function* watchSchedule() {
+  yield takeEvery(SCHEDULE_UPDATE, scheduleUpdate)
+}
+
 export default function* rootSaga() {
   yield all([
     watchAuth(),
-    watchEmployee()
+    watchEmployee(),
+    watchSchedule()
   ])
 }
