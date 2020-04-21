@@ -38,13 +38,16 @@ export function* employeeGet({ query }) {
   const { status } = response
   if (status === 404)
     return yield put(requestFail({ message: 'Sorry, there is no corresponding employee.' }))
-  if (status === 400) {
-    const errorPayload = JSON.parse((yield response.json()).message)
-    return yield put(requestFail(handleBadRequest(errorPayload)))
-  }
   if (status === 200) {
     const employees = yield response.json()
-    return yield put(requestSuccess({ employees }))
+    const mappedEmployees = employees.employee.map(employee => {
+      const { effectiveSchedule, ...rest} = employee
+      const lastShift = effectiveSchedule[effectiveSchedule.length - 1]
+      ? effectiveSchedule[effectiveSchedule.length - 1].range
+      : null
+      return {...rest, lastShift }
+    })
+    return yield put(requestSuccess({ employees: mappedEmployees }))
   }
   const { message } = yield response.json()
   return yield put(requestFail({ message }))
@@ -81,10 +84,6 @@ export function* employeeDelete({ id }) {
     }
   })
   const { status } = response
-  if (status === 400) {
-    const errorPayload = JSON.parse((yield response.json()).message)
-    return yield put(requestFail(handleBadRequest(errorPayload)))
-  }
   if (status === 204) {
     yield response
     return yield put(requestSuccess({ employeeDeleted: true }))

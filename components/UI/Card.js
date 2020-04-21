@@ -3,12 +3,13 @@ import { TouchableOpacity, Text, Alert, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { employeeDelete } from '../../store/actions'
+import { scheduleUpdate, employeeDelete } from '../../store/actions'
 import {
   CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton, cardFontSize
 } from '../Styled'
 
-const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position }) => {
+const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position, hasArrived,
+  lastShift }) => {
   const opacity = useRef(new Animated.Value(0)).current
   const role = useSelector(({ requestReducer: { role } }) => role)
   const dispatch = useDispatch()
@@ -26,15 +27,23 @@ const Card = ({ _id, profilePic, surname, name, secondName, personnelName, posit
       <CardText>
         Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
         {`\n${position}`}
+        {role === 'guard' && (
+          <>
+            <Text style={{ fontWeight: 'bold' }}>{`\nLast shift: `}</Text>{lastShift
+              ? `${lastShift}`
+              : 'absent'}
+          </>
+        )}
       </CardText>
       <CardSeparator />
       {role === 'guard' && (
         <TouchableOpacity>
           <StyledButton
-            color="#0f0"
-            fontSize={cardFontSize}>
-            ARRIVED
-            </StyledButton>
+            color={hasArrived ? "#008bd1" : "#0f0"}
+            fontSize={cardFontSize}
+            onPress={() => dispatch(scheduleUpdate(_id))}>
+            {hasArrived ? 'DEPARTURED' : 'ARRIVED'}
+          </StyledButton>
         </TouchableOpacity>
       )}
       {role === 'hr' && (
