@@ -1,6 +1,7 @@
 import React from 'react'
 import 'react-native'
 import renderer from 'react-test-renderer'
+import { useSelector } from 'react-redux'
 
 import Card from '../components/UI/Card'
 
