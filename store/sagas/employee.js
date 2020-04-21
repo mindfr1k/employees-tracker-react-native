@@ -40,8 +40,14 @@ export function* employeeGet({ query }) {
     return yield put(requestFail({ message: 'Sorry, there is no corresponding employee.' }))
   if (status === 200) {
     const employees = yield response.json()
-    console.log(employees)
-    return yield put(requestSuccess({ employees }))
+    const mappedEmployees = employees.employee.map(employee => {
+      const { effectiveSchedule, ...rest} = employee
+      const lastShift = effectiveSchedule[effectiveSchedule.length - 1]
+      ? effectiveSchedule[effectiveSchedule.length - 1].range
+      : null
+      return {...rest, lastShift }
+    })
+    return yield put(requestSuccess({ employees: mappedEmployees }))
   }
   const { message } = yield response.json()
   return yield put(requestFail({ message }))

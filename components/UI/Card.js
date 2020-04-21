@@ -8,7 +8,8 @@ import {
   CardContainer, CardImage, CardHeader, CardText, CardSeparator, StyledButton, cardFontSize
 } from '../Styled'
 
-const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position, hasArrived }) => {
+const Card = ({ _id, profilePic, surname, name, secondName, personnelName, position, hasArrived,
+  lastShift }) => {
   const opacity = useRef(new Animated.Value(0)).current
   const role = useSelector(({ requestReducer: { role } }) => role)
   const dispatch = useDispatch()
@@ -26,6 +27,13 @@ const Card = ({ _id, profilePic, surname, name, secondName, personnelName, posit
       <CardText>
         Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
         {`\n${position}`}
+        {role === 'guard' && (
+          <>
+            <Text style={{ fontWeight: 'bold' }}>{`\nLast shift: `}</Text>{lastShift
+              ? `${lastShift}`
+              : 'absent'}
+          </>
+        )}
       </CardText>
       <CardSeparator />
       {role === 'guard' && (

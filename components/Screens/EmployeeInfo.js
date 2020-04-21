@@ -23,7 +23,7 @@ const EmployeeInfo = () => {
           : employees
             ? (
               <FlatList
-                data={employees.employee}
+                data={employees}
                 renderItem={({ item }) => <Card {...item} />}
                 keyExtractor={({ _id }) => _id} />
             )
