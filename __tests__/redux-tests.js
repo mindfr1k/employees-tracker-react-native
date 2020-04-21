@@ -2,7 +2,6 @@ import 'react-native'
 
 import { REQUEST_START, REQUEST_FAIL, REQUEST_SUCCESS } from '../store/actions/action-types'
 import requestReducer from '../store/reducers/request'
-// Note: test renderer must be required after react-native.
 
 describe('redux reducer handles requests correctly', () => {
   const store = { error: null, loading: false }

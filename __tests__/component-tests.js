@@ -3,7 +3,6 @@ import 'react-native'
 import renderer from 'react-test-renderer'
 
 import Card from '../components/UI/Card'
-import { useSelector } from 'react-redux'
 
 jest.mock('react-redux', () => ({ useSelector: jest.fn(() => 'guard'), useDispatch: jest.fn() }))
 jest.mock('@react-navigation/native', () => ({ useNavigation: jest.fn(() => ({ navigate: jest.fn() })) }))
