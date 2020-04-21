@@ -9,7 +9,7 @@
 
 ``` bash
 # clone the repository
-$ git clone https://github.com/mindfr1k/employees-tracker-react-native.git
+$ git clone https://github.com/stackNavigator/employees-tracker-react-native.git
 
 # change directory to current repository location
 $ cd employees-tracker-react-native
