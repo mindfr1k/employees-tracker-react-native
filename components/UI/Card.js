@@ -25,8 +25,8 @@ const Card = ({ _id, profilePic, surname, name, secondName, personnelName, posit
       />
       <CardHeader>{`${surname} ${name} ${secondName}`}</CardHeader>
       <CardText>
-        Personnel number:<Text style={{ fontWeight: 'bold' }}>{` ${personnelName}`}</Text>
-        {`\n${position}`}
+        Personnel number: <Text style={{ fontWeight: 'bold' }}>{`${personnelName}`}</Text>
+        {'\n'}{position}
         {role === 'guard' && (
           <>
             <Text style={{ fontWeight: 'bold' }}>{`\nLast shift: `}</Text>{lastShift

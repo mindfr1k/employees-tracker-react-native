@@ -20,7 +20,7 @@ const Form = ({ caption, action, employeeId, onSubmitCb, children }) => {
     .reduce((acc, { props: { id } }) => ({ ...acc, [id]: '' }), {}))
   const inputRefs = useRef({})
 
-  const validateFields = () => {
+  const fieldsAreValid = () => {
     const invalidField = children
       .filter(({ props: { validation, type } }) => validation && validation.required && type !== 'file')
       .find(({ props: { id } }) => formTextData[id].trim() === '')
@@ -31,10 +31,11 @@ const Form = ({ caption, action, employeeId, onSubmitCb, children }) => {
         onPress: () => inputRefs.current[id].focus()
       }])
     }
+    return true
   }
 
   const submitHandler = () => {
-    validateFields()
+    if (!fieldsAreValid()) return
     const requestData = new FormData()
     Object.entries(formTextData).forEach(([key, value]) => value && requestData.append(key, value))
     Object.entries(formMediaData).forEach(([key, value]) => value && requestData.append(key, value))
