@@ -51,7 +51,7 @@ describe('Card component renders correctly', () => {
     expect(shift).toBe('3/4/20, 5:15 - 3/4/20, 6:15')
   })
   it('renders controls for hr', () => {
-    useSelector.mockImplementation(() => 'hr')
+    useSelector.mockImplementationOnce(() => 'hr')
     renderedComponent = reRenderWithProps(Card, { ...props })
     const editButton = renderedComponent.children[4].children[0].children[0]
     expect(editButton).toBe('EDIT')
