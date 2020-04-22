@@ -4,7 +4,12 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { baseUrl } from './util'
 import { requestStart, requestSuccess, requestFail } from '../actions'
 
-export function* scheduleUpdate({ id }) {
+interface ScheduleAction {
+  type: string
+  id: string
+}
+
+export function* scheduleUpdate({ id }: ScheduleAction) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/schedule/${id}`, {
     method: 'PATCH',

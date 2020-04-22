@@ -4,7 +4,14 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { baseUrl, handleBadRequest } from './util'
 import { requestStart, requestSuccess, requestFail } from '../actions'
 
-export function* employeeAdd({ formData }) {
+interface EmployeeAction {
+  type: string
+  query?: string
+  id?: string
+  formData?: any
+}
+
+export function* employeeAdd({ formData }: EmployeeAction) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employees`, {
     method: 'POST',
@@ -28,7 +35,7 @@ export function* employeeAdd({ formData }) {
   return yield put(requestFail({ message }))
 }
 
-export function* employeeGet({ query }) {
+export function* employeeGet({ query }: EmployeeAction) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employees?query=${query}`, {
     headers: {
@@ -53,7 +60,7 @@ export function* employeeGet({ query }) {
   return yield put(requestFail({ message }))
 }
 
-export function* employeeUpdate({ id, formData }) {
+export function* employeeUpdate({ id, formData }: EmployeeAction) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employee/${id}`, {
     method: 'PATCH',
@@ -75,7 +82,7 @@ export function* employeeUpdate({ id, formData }) {
   return yield put(requestFail({ message }))
 }
 
-export function* employeeDelete({ id }) {
+export function* employeeDelete({ id }: EmployeeAction) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employee/${id}`, {
     method: 'DELETE',

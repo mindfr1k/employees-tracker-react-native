@@ -20,7 +20,7 @@ const Card = ({ _id, profilePic, surname, name, secondName, personnelName, posit
         style={{ opacity }}
         source={{ uri: profilePic }}
         onLoad={() => {
-          Animated.timing(opacity, { toValue: 1, duration: 500 }).start()
+          Animated.timing(opacity, { toValue: 1, duration: 500, useNativeDriver: true }).start()
         }}
       />
       <CardHeader>{`${surname} ${name} ${secondName}`}</CardHeader>

@@ -5,7 +5,12 @@ import jwtDecode from 'jwt-decode'
 import { baseUrl, handleBadRequest } from './util'
 import { requestStart, requestSuccess, requestFail, verifyStart, verifyEnd } from '../actions'
 
-export function* authSignIn({ formData }) {
+interface AuthAction {
+  type: string
+  formData: any
+}
+
+export function* authSignIn({ formData }: AuthAction) {
   yield put(requestStart())
   const requestData = formData._parts.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
   const response = yield fetch(`${baseUrl}/signin`, {
@@ -32,7 +37,7 @@ export function* authSignIn({ formData }) {
     return yield put(requestSuccess({ token, role }))
   }
   const { message } = yield response.json()
-  return yield put(requestFail({ message }))
+  yield put(requestFail({ message }))
 }
 
 export function* authVerify() {
