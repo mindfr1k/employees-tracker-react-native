@@ -1,18 +1,10 @@
 import { VERIFY_START, VERIFY_END } from '../actions/action-types'
 
-interface AuthPayload {
-  type: string
-}
-
-interface AuthState {
-  loading: boolean
-}
-
-const initState: AuthState = {
+const initState = {
   loading: false
 }
 
-export default (state = initState, { type }: AuthPayload): AuthState => {
+export default (state = initState, { type }) => {
   switch (type) {
     case VERIFY_START:
       return { ...state, loading: true }

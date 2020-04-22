@@ -6,20 +6,7 @@ import { authVerify } from '../../store/actions'
 import ActionButton from './ActionButton'
 import { StyledForm } from '../Styled'
 
-interface Props {
-  caption: any
-  action: any
-  employeeId?: any
-  onSubmitCb?: any
-  children: any
-}
-
-interface FormData {
-  append(name: string, value: any): void
-  _parts?: any
-}
-
-const Form: React.FC<Props> = ({ caption, action, employeeId, onSubmitCb, children }) => {
+const Form = ({ caption, action, employeeId, onSubmitCb, children }) => {
   const loading = useSelector(({ requestReducer: { loading } }) => loading)
   const error = useSelector(({ requestReducer: { error } }) => error)
   const [isRequestIdle, setIsRequestIdle] = useState(true)
@@ -49,7 +36,7 @@ const Form: React.FC<Props> = ({ caption, action, employeeId, onSubmitCb, childr
 
   const submitHandler = () => {
     if (!fieldsAreValid()) return
-    const requestData: FormData = new FormData()
+    const requestData = new FormData()
     Object.entries(formTextData).forEach(([key, value]) => value && requestData.append(key, value))
     Object.entries(formMediaData).forEach(([key, value]) => value && requestData.append(key, value))
     if (!requestData._parts.length)

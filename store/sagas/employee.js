@@ -4,20 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { baseUrl, handleBadRequest } from './util'
 import { requestStart, requestSuccess, requestFail } from '../actions'
 
-interface EmployeeAction {
-  type: string
-  query?: string
-  id?: string
-  formData?: {
-    _parts: [string, string][]
-  }
-}
-
-interface Employee {
-  effectiveSchedule: { [key: string]: string }[]
-}
-
-export function* employeeAdd({ formData }: EmployeeAction) {
+export function* employeeAdd({ formData }) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employees`, {
     method: 'POST',
@@ -41,7 +28,7 @@ export function* employeeAdd({ formData }: EmployeeAction) {
   return yield put(requestFail({ message }))
 }
 
-export function* employeeGet({ query }: EmployeeAction) {
+export function* employeeGet({ query }) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employees?query=${query}`, {
     headers: {
@@ -53,7 +40,7 @@ export function* employeeGet({ query }: EmployeeAction) {
     return yield put(requestFail({ message: 'Sorry, there is no corresponding employee.' }))
   if (status === 200) {
     const employees = yield response.json()
-    const mappedEmployees = employees.employee.map((employee: Employee) => {
+    const mappedEmployees = employees.employee.map(employee => {
       const { effectiveSchedule, ...rest } = employee
       const lastShift = effectiveSchedule[effectiveSchedule.length - 1]
         ? effectiveSchedule[effectiveSchedule.length - 1].range
@@ -66,7 +53,7 @@ export function* employeeGet({ query }: EmployeeAction) {
   return yield put(requestFail({ message }))
 }
 
-export function* employeeUpdate({ id, formData }: EmployeeAction) {
+export function* employeeUpdate({ id, formData }) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employee/${id}`, {
     method: 'PATCH',
@@ -88,7 +75,7 @@ export function* employeeUpdate({ id, formData }: EmployeeAction) {
   return yield put(requestFail({ message }))
 }
 
-export function* employeeDelete({ id }: EmployeeAction) {
+export function* employeeDelete({ id }) {
   yield put(requestStart())
   const response = yield fetch(`${baseUrl}/employee/${id}`, {
     method: 'DELETE',

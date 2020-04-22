@@ -4,14 +4,8 @@ import jwtDecode from 'jwt-decode'
 
 import { baseUrl, handleBadRequest } from './util'
 import { requestStart, requestSuccess, requestFail, verifyStart, verifyEnd } from '../actions'
-import { FormData } from '../../common-interfaces'
 
-interface AuthAction {
-  type: string
-  formData: FormData
-}
-
-export function* authSignIn({ formData }: AuthAction) {
+export function* authSignIn({ formData }) {
   yield put(requestStart())
   const requestData = formData._parts.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
   const response = yield fetch(`${baseUrl}/signin`, {

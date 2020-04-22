@@ -8,15 +8,9 @@ import MediaInput from '../UI/MediaInput'
 import withKeyboardDismiss from '../hoc/withKeyboardDismiss'
 import { CenteredContainer } from '../Styled'
 
-interface RouteParams {
-  params: {
-    employeeId?: any
-  }
-}
-
 const UpdateEmployee = () => {
   const { navigate } = useNavigation()
-  const { params: { employeeId } }: RouteParams = useRoute()
+  const { params: { employeeId } } = useRoute()
   return (
     <CenteredContainer>
       <Form
