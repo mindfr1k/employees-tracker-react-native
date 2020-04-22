@@ -4,10 +4,11 @@ import jwtDecode from 'jwt-decode'
 
 import { baseUrl, handleBadRequest } from './util'
 import { requestStart, requestSuccess, requestFail, verifyStart, verifyEnd } from '../actions'
+import { FormData } from '../../common-interfaces'
 
 interface AuthAction {
   type: string
-  formData: any
+  formData: FormData
 }
 
 export function* authSignIn({ formData }: AuthAction) {

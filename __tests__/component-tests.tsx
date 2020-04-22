@@ -8,7 +8,20 @@ import Card from '../components/UI/Card'
 jest.mock('react-redux', () => ({ useSelector: jest.fn(() => 'guard'), useDispatch: jest.fn() }))
 jest.mock('@react-navigation/native', () => ({ useNavigation: jest.fn(() => ({ navigate: jest.fn() })) }))
 
-const testCardPropsEquality = (jsonComponent, props) => {
+interface EmployeeProps {
+  surname: string
+  name: string
+  secondName: string
+  personnelName: string
+  position: string
+}
+
+interface RenderedJSON {
+  children?: any
+}
+
+const testCardPropsEquality = (jsonComponent: RenderedJSON, props: EmployeeProps) => {
+  console.log(jsonComponent.children[1])
   const jsonProps = {
     surname: jsonComponent.children[1].children[0].split(' ')[0],
     name: jsonComponent.children[1].children[0].split(' ')[1],
@@ -16,7 +29,7 @@ const testCardPropsEquality = (jsonComponent, props) => {
     personnelName: jsonComponent.children[2].children[1].children[0],
     position: jsonComponent.children[2].children[3]
   }
-  Object.keys(props).forEach(prop => expect(jsonProps[prop]).toBe(props[prop]))
+  Object.keys(props).forEach((prop: keyof EmployeeProps) => expect(jsonProps[prop]).toBe(props[prop]))
 }
 
 const reRenderWithProps = (Component, props) => {

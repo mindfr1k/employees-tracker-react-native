@@ -8,7 +8,13 @@ interface EmployeeAction {
   type: string
   query?: string
   id?: string
-  formData?: any
+  formData?: {
+    _parts: [string, string][]
+  }
+}
+
+interface Employee {
+  effectiveSchedule: { [key: string]: string }[]
 }
 
 export function* employeeAdd({ formData }: EmployeeAction) {
@@ -47,12 +53,12 @@ export function* employeeGet({ query }: EmployeeAction) {
     return yield put(requestFail({ message: 'Sorry, there is no corresponding employee.' }))
   if (status === 200) {
     const employees = yield response.json()
-    const mappedEmployees = employees.employee.map(employee => {
-      const { effectiveSchedule, ...rest} = employee
+    const mappedEmployees = employees.employee.map((employee: Employee) => {
+      const { effectiveSchedule, ...rest } = employee
       const lastShift = effectiveSchedule[effectiveSchedule.length - 1]
-      ? effectiveSchedule[effectiveSchedule.length - 1].range
-      : null
-      return {...rest, lastShift }
+        ? effectiveSchedule[effectiveSchedule.length - 1].range
+        : null
+      return { ...rest, lastShift }
     })
     return yield put(requestSuccess({ employees: mappedEmployees }))
   }
