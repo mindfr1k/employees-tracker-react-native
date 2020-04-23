@@ -11,13 +11,14 @@ const HeaderContainer = () => {
   const role = useSelector(({ requestReducer: { role } }) => role)
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const navigation = useNavigation()
-  const searchInput = useRef()
+  const searchInput = useRef(null)
   const initFlexValue = role === 'hr' ? 12 : 200
   const flex = useRef(new Animated.Value(initFlexValue)).current
 
   const animateFlex = toValue => Animated.timing(flex, {
     toValue,
-    duration: 200
+    duration: 200,
+    useNativeDriver: false
   })
   const onFocus = () => {
     animateFlex(5).start(() => {

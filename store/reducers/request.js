@@ -2,7 +2,8 @@ import { REQUEST_START, REQUEST_SUCCESS, REQUEST_FAIL } from '../actions/action-
 
 const initState = {
   error: null,
-  loading: false
+  loading: false,
+  employees: null
 }
 
 export default (state = initState, { type, ...payload }) => {

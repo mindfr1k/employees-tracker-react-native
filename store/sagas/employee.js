@@ -41,11 +41,11 @@ export function* employeeGet({ query }) {
   if (status === 200) {
     const employees = yield response.json()
     const mappedEmployees = employees.employee.map(employee => {
-      const { effectiveSchedule, ...rest} = employee
+      const { effectiveSchedule, ...rest } = employee
       const lastShift = effectiveSchedule[effectiveSchedule.length - 1]
-      ? effectiveSchedule[effectiveSchedule.length - 1].range
-      : null
-      return {...rest, lastShift }
+        ? effectiveSchedule[effectiveSchedule.length - 1].range
+        : null
+      return { ...rest, lastShift }
     })
     return yield put(requestSuccess({ employees: mappedEmployees }))
   }

@@ -32,7 +32,7 @@ export function* authSignIn({ formData }) {
     return yield put(requestSuccess({ token, role }))
   }
   const { message } = yield response.json()
-  return yield put(requestFail({ message }))
+  yield put(requestFail({ message }))
 }
 
 export function* authVerify() {
